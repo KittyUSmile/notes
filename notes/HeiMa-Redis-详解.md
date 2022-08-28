@@ -689,7 +689,7 @@ RDB和AOF各有各的优点，如果对数据安全性要求较高，在实际�
 
 
 
-## Redis主从
+## Redis主从集群
 
 单节点Redis的并发能力是有上限的，要进一步提高Redis的并发能力，就要搭建主从集群，实现读写分离。即读在从，写在主。
 
@@ -761,12 +761,12 @@ master如何判断slave**是不是第一次**来同步数据？这里用到了�
 
 #### 同步优化
 
-主从之间的频繁触发全量同步很消耗性能，因此可以从以下几个方面来优化Redis主从集群：
+主从之间的频繁触发全量同步很**消耗性能**，因此可以从以下几个方面来优化Redis主从集群：
 
-- 在master中配置repl-diskless-sync yes启用无磁盘复制，避免全量同步时的磁盘IO（正常情况下主机全量同步是先将RDB文件写入磁盘，再通过网络IO传输给从机）。
-- Redis单节点上的内存占用不要太大，减少RDB导致的过多的磁盘IO。
-- 适当提高repl_baklog的大小，发现slave宕机时尽快实现故障恢复，尽可能避免全量同步。
-- 限制一个master上的slave节点数量，如果实在太多slave，则可以采用主-从-从链式结构（即从-从节点以从节点为主节点），减少master压力。
+- 在master中配置repl-diskless-sync yes**启用无磁盘复制**，避免全量同步时的磁盘IO（正常情况下主机全量同步是先将RDB文件写入磁盘，再通过网络IO传输给从机）。
+- Redis单节点上的**内存占用不要太大**，减少RDB导致的过多的磁盘IO。
+- 适当**提高repl_baklog的大小**，发现slave宕机时尽快实现故障恢复，尽可能避免全量同步。
+- 限制一个master上的slave节点数量，如果实在太多slave，则可以**采用主-从-从链式结构**（即从-从节点以从节点为主节点），减少master压力。
 
 
 
@@ -789,6 +789,230 @@ master如何判断slave**是不是第一次**来同步数据？这里用到了�
 #### 什么时候执行增量同步？
 
 - slave节点断开又恢复，并且在repl_baklog中能找到offset时。
+
+
+
+## Redis哨兵
+
+### 哨兵的作用
+
+Redis提供了哨兵（Sentinel）机制来实现主从集群的**自动故障恢复**。哨兵的结构和作用如下：
+
+- **监控**：Sentinel会不断检查您的master和slave是否按预期工作。
+- **自动故障恢复**：如果master故障，Sentinel会将一个slave提升为master，当故障实例恢复后也以新的master为主。
+- **通知**：Sentinel充当Redis客户端的服务发现来源，当集群发生故障转移时，会将最新消息推送给Redis的客户端。
+
+
+
+### 服务状态监控
+
+Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每个实例发送ping命令。状态检测分为主观下线和客观下线两种。
+
+- **主观下线**：如果某sentinel节点发现某实例**未在规定时间响应**，则认为该实例主观下线。
+- **客观下线**：若超过指定数量（quorum，可在redis.conf中配置）的sentinel都认为该实例主观下线，则该实例客观下线。quorum值最好超过Sentinel实例数量的**一半**。
+
+
+
+### 选举新的master
+
+一旦发现master故障，sentinel需要在slave中选择一个作为新的master，**选取依据**是这样的：
+
+- 首先会判断slave节点与master节点**断开时间长短**，如果超过指定值（down-after-milliseconds * 10，可在redis.conf中配置），则会排除该slave节点。
+- 然后判断slave节点的**slave-priority值**，越小优先级越高，如果是0则永不参与选举。
+- 如果slave-priority一样，则判断slave节点的**offset值**（**主要选取依据**），越大说明数据越新，优先级越高。
+- 最后则判断slave节点的运行id大小（启动时生成），越小优先级越高。
+
+
+
+### 如何实现故障转义
+
+当选中了其中一个slave作为新的master后（例如192.168.1.1上7002端口的slave1），故障的**转移步骤**如下：
+
+- sentinel给备选的slave1节点发送**slaveof no one**命令，让该节点成为master。
+- sentinel给所有其它slave发送slaveof 192.168.1.1 7002命令，让这些命令成为新master的从节点，开始从新的master上同步数据。
+- 最后，sentinel将故障节点标记为slave（向其发送slave of 192.168.1.1 7002命令），当故障节点恢复后会自动成为新的master的slave节点。
+
+
+
+### 总结
+
+#### Sentinel的三个作用是什么？
+
+- 监控
+- 故障转移
+- 通知
+
+
+
+#### Sentinel如何判断一个redis实例是否健康？
+
+- 每隔1秒发送一次ping命令，如果超过一定时间没有pong则认为是主观下线。
+- 如果大多数sentinel都认为实例主观下线，则判定为服务下线。
+
+
+
+#### 故障转移步骤有哪些？
+
+- 首先选定一个slave作为新的master，执行slaveof no one
+- 然后向其它所有节点执行slaveof new_master命令
+- 修改故障节点配置，添加slaveof new_master命令
+
+
+
+## Redis哨兵集群
+
+### 搭建哨兵集群步骤
+
+1. 在/tmp目录下**创建三个文件夹** mkdir s1 s2 s3
+
+2. 在s1文件夹中**创建sentinel.conf文件**：vi sentinel.conf
+
+   ```
+   #端口号
+   port 27001
+   #声明本sentinel的ip地址，避免Redis自己查询到不同ip导致集群错误
+   sentinel announce-ip 192.168.150.101
+   #监控名为mymaster，ip和端口分别为192.168.150.101和7001的主节点，且设置选举master的quorum值为2
+   #只监控主节点的原因是主节点中有从节点的信息，因此不监控从节点
+   sentinel monitor mymaster 192.168.150.101 7001 2
+   #slave和master断开的最大超时时间（不配默认也是该超时时间）
+   sentinel down-after-milliseconds mymaster 5000
+   #slave故障恢复的超时时间（不配默认也是该超时时间）
+   sentinel failover-timeout mymaster 60000
+   #工作目录
+   dir "/tmp/s1"
+   ```
+
+3. 将该配置拷贝至s2和s3目录，**修改端口号和工作目录**。
+
+4. 启动哨兵集群：
+
+   ```
+   #第一个
+   redis-sentinel s1/sentinel.conf
+   #第二个
+   redis-sentinel s2/sentinel.conf
+   #第三个
+   redis-sentinel s3/sentinel.conf
+   ```
+
+5. down掉主节点，可以发现哨兵先选出哨兵之间的master，由master去两个从节点间选出主节点，并给主节点发送slaveof no one命令，给其它从节点发送slave of 主节点命令，给宕机主节点修改redis.conf文件为slave of 主节点，让其重启就继续RDB复制。
+
+
+
+### RedisTemplate的哨兵模式
+
+在Sentinel集群监管下的Redis主从集群，其节点会因为自动故障转移而发生变化，Redis的客户端必须**感知**这种变化，及时**更新**连接信息。而Spring的RedisTemplate底层利用**lettuce**实现了节点的感知和自动切换。
+
+我们只需要引入springboot-starter-data-redis依赖，然后在yml或者properties中配置号sentinel的信息即可：
+
+```yml
+spring:
+  redis:
+    sentinel:
+      master: mymaster #指定master名称
+      nodes: #指定redis-sentinel集群信息
+        - 192.168.150.101:27001
+        - 192.168.150.101:27002
+        - 192.168.150.101:27003
+```
+
+光配置sentinel哨兵还不够，还需要设置主从Redis的读写分离，这里可以采用代码方式配置：
+
+```java
+@Bean
+public LettuceClientConfigurationBuilderCustomizer configurationBuilderCustomizer(){
+    /**
+         * 这里的ReadFrom是配置Redis的读取策略，是一个枚举，包括下面选择：
+         *  1、MASTER: 从主节点读取
+         *  2、MASTER_PREFERRED: 优先从master节点读取，master不可用才读取replica
+         *  3、REPLICA: 从slave(replica)节点读取
+         *  4、REPLICA_PREFERRED: 优先从slave(replica)节点读取，所有的slave都不可用才读取master
+         */
+    return configBuilder -> configBuilder.readFrom(ReadFrom.REPLICA_PREFERRED);
+}
+```
+
+
+
+## Redis分片集群
+
+### 分片集群结构
+
+主从和哨兵可以解决高可用、高并发读的问题，但是仍有两个问题没有解决：
+
+- **海量数据存储问题**（RDB消耗性能）
+- **高并发写的问题**（只有一个主节点用于写）
+
+使用分片集群可以解决上述问题，分片集群特征为：
+
+- 集群中有**多个master**，每个master保存不同数据
+- 每个master都可以有**多个slave节点**
+- master之间通过**ping**检测彼此健康状态
+- 客户端请求可以访问集群**任意**节点，最终都会被转发到**正确**节点
+
+
+
+### 搭建分片集群
+
+搭建分片集群步骤为：
+
+1. 创建六个文件夹，对应三对主从，7001，7002，7003，8001，8002，8003。
+
+   ```
+   mkdir 7001 7002 7003 8001 8002 8003
+   ```
+
+2. 在/tmp下准备一个新的redis.conf文件，文件内容如下（将端口号改为各自端口即可）：
+
+   ```xml
+   port 6379
+   #开启集群功能
+   cluster-enabled yes
+   #集群的配置文件名称，该文件只需要指定位置，有Redis自己创建维护
+   cluster-config-file /tmp/6379/nodes.conf
+   #节点心跳失败的超时时间
+   cluster-node-timeout 5000
+   #持久化文件存放目录
+   dir /tmp/6379
+   #绑定地址(0.0.0.0让所有机器都能访问)
+   bind 0.0.0.0
+   #让redis后台运行
+   daemonize yes
+   #注册的实例ip
+   replica-announce-ip 192.168.150.101
+   #保护模式(为no即不做用户名账号密码校验)
+   protected-mode no
+   #数据库数量
+   databases 1
+   #日志(开启后台模式后不再在控制台打印日志，需要指定日志存储位置)
+   logfile /tmp/6379/run.log
+   ```
+
+3. 将该文件分别拷贝到各个夹，修改文件内容对应各自端口。
+
+4. Redis5.0后启动方式：
+
+   ```
+   redis-cli --cluster create --cluster-relicas 1 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003
+   
+   #命令说明
+   redis-cli --cluster 或者 ./redis-trib.rb: 代表集群此操作命令
+   create: 代表是创建集群
+   --replicas 1 或者 --cluster-replicas 1: 指定集群中每个master的副本个数为1，此时 节点总数 / (replicas + 1)得到的就是master的数量，即节点列表中的前n个就是master，其它节点都是slave,随机被分配到不同master。
+   ```
+
+5. 启动成功后，通过命令可以查看集群状态：
+
+   ```
+   redis-cli -p 7001 cluster nodes
+   ```
+
+
+
+### 散列插槽(slots)
+
+
 
 
 
