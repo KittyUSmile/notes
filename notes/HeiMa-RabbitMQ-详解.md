@@ -930,13 +930,9 @@ spring:
 
 
 
-
-
-### 7.2、Consumer ACK
-
-
-
 ### 7.3、消费端限流
+
+
 
 
 
@@ -1036,9 +1032,139 @@ public void test4(){
 
 ### 7.6、延迟队列
 
-延迟队列的效果类似TTL + 死信队列，但没那么复杂。RabbitMQ官方使用了一个插件实现了延迟队列，首先需要在Linux中或Docker容器中进行安装：
+延迟队列的效果类似TTL + 死信队列，但没那么复杂。RabbitMQ官方使用了一个**插件**实现了延迟队列，首先需要在Linux中或Docker容器中进行安装：https://blog.csdn.net/DZP_dream/article/details/118391439
+
+虽然被称作延迟队列，但起作用的其实是**交换机**，即x-delayed-message。在安装好后，可以在新增交换机位置处选择x-delayed-message类型的交换机。
+
+使用该延迟交换机的步骤为：
+
+1. 声明交换机类型为**x-delayed-message**类型，在Arguments参数中指定路由类型，即x-delayed-type=direct。
+2. 消息发送时带上Header信息x-delay=5000。
+
+延迟交换机受到带有Header消息的消息时，会将消息缓存指定时间（与其它交换机不同，交换机一般不存储消息），然后再根据路由方式发送到指定队列。
+
+延迟交换机的声明有**两种**方式，一种是**基于注解**的方式，一种是**基于Bean**的方式：
+
+基于注解：
+
+```java
+@RabbitListener(bindings = @QueueBinding(
+        value = @Queue(name = "delay.queue", durable = "true"),
+        exchange = @Exchange(name = "delay.direct", delayed = "true"),
+        key = "delay"
+))
+public void listenDelayedQueue(String msg){
+    log.info("接收到 delay.queue的延迟消息：{}", msg);
+}
+```
+
+基于Bean：
+
+```java
+@Bean
+public DirectExchange delayedExchange(){
+    return ExchangeBuilder.directExchange("delay.direct")
+            .delayed()//设置delayed属性为true
+            .durable(true)//持久化设置
+            .build();
+}
+
+@Bean
+public Queue delayedQueue(){
+    return new Queue("delay.queue");
+}
+
+@Bean
+public Binding delayedBinding(){
+    return BindingBuilder.bind(delayedQueue()).to(delayedExchange()).with("delay");
+}
+```
 
 
+
+#### 总结
+
+**延迟队列插件的使用步骤包括哪些**？
+
+- 声明一个交换机，**添加delayed属性**为true
+- 发送消息时，**添加x-delay头**，值为超时时间
+
+
+
+### 惰性队列
+
+#### 消息堆积问题
+
+谈惰性队列前先谈**消息堆积问题**，当生产者发送消息的速度**超过了**消费者处理消息的速度，就会导致队列中的消息堆积，一直到队列存满，而最早入队的消息，就成了**死信**，就可能会被丢弃，这就是消息堆积带来的问题，因此消息堆积是不健康的现象。
+
+解决消息堆积有三种思路：
+
+1. **增加更多的消费者**，提高消费速度。
+2. 在消费者内**开启线程池**加快消息处理速度。
+3. **扩大队列容积**，提高堆积上限。
+
+
+
+因此就需要引出**惰性队列**了，RabbitMQ队列是基于**内存**的，速度快，但是有存储上限，一般到达内存限额的40%左右，RabbitMQ就会停止接收消息，先将一部分消息存入磁盘，降低内存使用，再接收消息，而消息堆积问题最容易引起这种情况，而导致RabbitMQ性能忽高忽低。
+
+而惰性队列中基本解决了这个问题，因为惰性队列中的消息是存入**磁盘**而非内存中的，惰性队列有以下特征：
+
+- 接收到的消息**直接存入磁盘**而非内存
+- 消费者消费到消息时惰性队列才从磁盘中读取并加载到内存
+- 因为基于磁盘，因此支持**百万级别**的消息存储
+
+
+
+如果要设置一个队列为惰性队列，只需要在声明队列时，**指定x-queue-mode属性为lazy即可**。或者直接通过Linux命令将一个运行中的队列修改为惰性队列。
+
+```
+rabbitmqctl set_policy Lazy "^lazy-queue$" '{"queue-mode":"lazy"}' --apply-to queues
+```
+
+而使用SpringAMQP声明惰性队列分为两种方式：
+
+**基于Bean**：
+
+```java
+@Bean
+public Queue lazyQueue(){
+    return QueueBuilder
+            .durable("lazy.queue")
+            .lazy()//开启 x-queue-mode为Lazy
+            .build();
+}
+```
+
+基于注解：
+
+```java
+@RabbitListener(queuesToDeclare = @Queue(
+        name = "lazy.queue",
+        durable = "true",
+        arguments = @Argument(name = "x-queue-mode", value = "lazy")
+))
+public void listenLazyQueue(String msg){
+    log.info("接收到 lazy.queue 的消息：{}", msg);
+}
+```
+
+#### 总结
+
+**消息堆积问题的解决方案**？
+
+1. 增加消费者数量
+2. 消费者使用多线程
+3. 使用惰性队列，可以在mq中保存更多消息
+
+**惰性队列的优点？**
+
+1. 基于磁盘存储，消息上限高
+2. 没有间歇性的page-out，性能较稳定
+
+**惰性队列的缺点？**
+
+1. 速度取决于磁盘IO的速度
+2. 基于磁盘存储，消息时效性会降低
 
 
 
@@ -1066,5 +1192,85 @@ public void test4(){
 
 ## 9、RabbitMQ集群搭建
 
-### 10、RabbitMQ高可用集群
+### 集群分类
 
+RabbitMQ基于**Erlang**语言编写，Erlang是一个面向并发的语言，天然支持集群模式。
+
+RabbitMQ的集群有两种模式：
+
+- **普通集群**：一种**分布式集群**，将队列分散到集群的各个节点，即每个机器上都存储各自队列。可以提高集群的并发能力，缺点是不支持高可用，宕机后某队列直接下线。
+- **镜像集群**：一种**主从集群**，在普通集群的基础上，添加了主从备份功能，提高了集群的可用性。
+
+镜像集群虽然支持主从，但其主从并不是**强一致**的，在某些情况下（如备份时宕机）可能有数据丢失的风险。因此RabbitMQ在3.8版本后，推出新的功能：**仲裁队列**来代替镜像集群，底层采用Raft协议来确保主从数据一致性。
+
+### 普通集群
+
+普通集群，或者叫标准集群（classic cluster），其具备以下特征：
+
+- 在集群的各个节点之间可以**共享部分数据**（虽然各节点中的队列或交换机都是独立的），如：交换机、队列元信息，但**不包含队列中的消息**。
+- 当访问集群某节点时，如果队列不在该节点中，会通过存储的队列元信息找到目标队列，在目标队列中拿到消息返回。
+- 队列所在节点如果宕机，队列中的消息就会丢失。
+
+
+
+### 镜像集群
+
+镜像集群：本质是主从模式，但是具备以下特征：
+
+- 交换机、队列、队列中的消息会在镜像节点中存有**同步备份**。
+- 拥有队列的节点被称为主节点，具有该队列备份的节点被称为镜像节点。
+- 主节点也可以是其它主节点的镜像节点。
+- 所有操作都应该由**主节点**完成，然后同步给镜像节点。
+- 主节点宕机后，镜像节点会替代称为新的主节点。
+
+
+
+镜像选择有三种模式：
+
+|  ha-mode(模式)  |     ha-params     |                             效果                             |
+| :-------------: | :---------------: | :----------------------------------------------------------: |
+| 准确模式exactly | 队列的副本量count | 集群中队列的副本数(包括主节点)，count如果为1表示只有单个副本:即队列主节点。count为2表示2个副本：1主队列和1个镜像队列。换句话说：count = 镜像数量 + 1。如果集群中的节点数量小于count，则该队列将镜像到所有节点。如果有集群总数大于count + 1，且如果包含镜像的节点出现故障，则将在另一个节点上创建一个新的镜像。 |
+|       all       |      (none)       | 队列在集群中的所有节点之间镜像。队列将镜像到任何新加入的节点。镜像到所有节点会对所有集群节点施加额外的压力，如网络IO，磁盘IO，推荐使用exactly模式，设置副本数量为（n/2 + 1） |
+|      nodes      |    node names     | 指定队列创建到哪些具体节点，如果指定的系欸但不存在，则出现异常。 |
+
+
+
+### 仲裁队列
+
+仲裁队列的出现主要是为了**解决镜像队列数据丢失**的问题，RabbitMQ3.8以后才有的新功能，用来代替镜像队列，具备以下特征：
+
+- 与镜像队列一样，都是主从模式，支持主从数据同步。
+- 使用非常简单，没有复杂的配置。
+- 主从同步基于Raft协议，强一致，不用担心数据丢失问题。
+
+仲裁队列的添加十分简单：
+
+![image-20220902150821530](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20220902150821530.png)
+
+
+
+测试使用SpringAMQP代码声明仲裁队列：
+
+1. 首先如果是集群状态，要先通过SpringAMQP连接集群，需要在yaml中配置：
+
+   ```yaml
+   spring:
+     rabbitmq:
+       addresses: 192.168.150.xxx:8071, 192.168.150.xxx:8072, 192.168.150.xxx:8073
+       username: guest
+       password: guest
+       virtual-host: /
+   ```
+
+2. 使用@Bean创建仲裁队列：
+
+   ```java
+   @Bean
+   public Queue quorumQueue(){
+       return QueueBuilder.durable("quorum.queue2")
+               .quorum()//设置为仲裁队列
+               .build();
+   }
+   ```
+
+   
