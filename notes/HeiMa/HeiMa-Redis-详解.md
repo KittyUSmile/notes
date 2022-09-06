@@ -741,7 +741,7 @@ RDB和AOF各有各的优点，如果对数据安全性要求较高，在实际�
 
 master如何判断slave**是不是第一次**来同步数据？这里用到了两个很重要的概念：
 
-- **Replication Id**：简称replid，是数据集的标记，id一致则说明是同一数据集。每一个master都哟唯一的replid，slave则会集成master节点的replid。
+- **Replication Id**：简称replid，是数据集的标记，id一致则说明是同一数据集。每一个master都有唯一的replid，slave则会集成master节点的replid。
 - **offset**：偏移量，随着记录在repl_baklog中的数据增多而逐渐增大。slave完成同步时也会记录当前同步的offset。如果slave的offset小于master的offset，说明slave数据落后于master，需要更新。
 
 因此slave做数据同步，必须向master**声明自己的replication id和offset**，master才可以判断到底需要同步哪些数据。
@@ -792,9 +792,11 @@ master如何判断slave**是不是第一次**来同步数据？这里用到了�
 
 
 
-## Redis哨兵
+## Redis哨兵集群
 
-### 哨兵的作用
+### Redis哨兵
+
+#### 哨兵的作用
 
 Redis提供了哨兵（Sentinel）机制来实现主从集群的**自动故障恢复**。哨兵的结构和作用如下：
 
@@ -804,7 +806,7 @@ Redis提供了哨兵（Sentinel）机制来实现主从集群的**自动故障�
 
 
 
-### 服务状态监控
+#### 服务状态监控
 
 Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每个实例发送ping命令。状态检测分为主观下线和客观下线两种。
 
@@ -813,7 +815,7 @@ Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每�
 
 
 
-### 选举新的master
+#### 选举新的master
 
 一旦发现master故障，sentinel需要在slave中选择一个作为新的master，**选取依据**是这样的：
 
@@ -824,7 +826,7 @@ Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每�
 
 
 
-### 如何实现故障转义
+#### 如何实现故障转移
 
 当选中了其中一个slave作为新的master后（例如192.168.1.1上7002端口的slave1），故障的**转移步骤**如下：
 
@@ -834,7 +836,7 @@ Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每�
 
 
 
-### 总结
+#### 总结
 
 #### Sentinel的三个作用是什么？
 
@@ -857,9 +859,72 @@ Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每�
 - 然后向其它所有节点执行slaveof new_master命令
 - 修改故障节点配置，添加slaveof new_master命令
 
+#### 哨兵的作用
+
+Redis提供了哨兵（Sentinel）机制来实现主从集群的**自动故障恢复**。哨兵的结构和作用如下：
+
+- **监控**：Sentinel会不断检查您的master和slave是否按预期工作。
+- **自动故障恢复**：如果master故障，Sentinel会将一个slave提升为master，当故障实例恢复后也以新的master为主。
+- **通知**：Sentinel充当Redis客户端的服务发现来源，当集群发生故障转移时，会将最新消息推送给Redis的客户端。
 
 
-## Redis哨兵集群
+
+#### 服务状态监控
+
+Sentinel基于**心跳机制**检测服务状态，每隔一秒向集群的每个实例发送ping命令。状态检测分为主观下线和客观下线两种。
+
+- **主观下线**：如果某sentinel节点发现某实例**未在规定时间响应**，则认为该实例主观下线。
+- **客观下线**：若超过指定数量（quorum，可在redis.conf中配置）的sentinel都认为该实例主观下线，则该实例客观下线。quorum值最好超过Sentinel实例数量的**一半**。
+
+
+
+#### 选举新的master
+
+一旦发现master故障，sentinel需要在slave中选择一个作为新的master，**选取依据**是这样的：
+
+- 首先会判断slave节点与master节点**断开时间长短**，如果超过指定值（down-after-milliseconds * 10，可在redis.conf中配置），则会排除该slave节点。
+- 然后判断slave节点的**slave-priority值**，越小优先级越高，如果是0则永不参与选举。
+- 如果slave-priority一样，则判断slave节点的**offset值**（**主要选取依据**），越大说明数据越新，优先级越高。
+- 最后则判断slave节点的运行id大小（启动时生成），越小优先级越高。
+
+
+
+#### 如何实现故障转移
+
+当选中了其中一个slave作为新的master后（例如192.168.1.1上7002端口的slave1），故障的**转移步骤**如下：
+
+- sentinel给备选的slave1节点发送**slaveof no one**命令，让该节点成为master。
+- sentinel给所有其它slave发送slaveof 192.168.1.1 7002命令，让这些命令成为新master的从节点，开始从新的master上同步数据。
+- 最后，sentinel将故障节点标记为slave（向其发送slave of 192.168.1.1 7002命令），当故障节点恢复后会自动成为新的master的slave节点。
+
+
+
+#### 总结
+
+##### Sentinel的三个作用是什么？
+
+- 监控
+- 故障转移
+- 通知
+
+
+
+##### Sentinel如何判断一个redis实例是否健康？
+
+- 每隔1秒发送一次ping命令，如果超过一定时间没有pong则认为是主观下线。
+- 如果大多数sentinel都认为实例主观下线，则判定为服务下线。
+
+
+
+##### 故障转移步骤有哪些？
+
+- 首先选定一个slave作为新的master，执行slaveof no one
+- 然后向其它所有节点执行slaveof new_master命令
+- 修改故障节点配置，添加slaveof new_master命令
+
+Redis哨兵集群
+
+
 
 ### 搭建哨兵集群步骤
 
@@ -937,11 +1002,9 @@ public LettuceClientConfigurationBuilderCustomizer configurationBuilderCustomize
 
 ## Redis分片集群
 
-### 分片集群结构
-
 主从和哨兵可以解决高可用、高并发读的问题，但是仍有两个问题没有解决：
 
-- **海量数据存储问题**（RDB消耗性能）
+- **海量数据存储问题**（主从同步RDB消耗性能）
 - **高并发写的问题**（只有一个主节点用于写）
 
 使用分片集群可以解决上述问题，分片集群特征为：
@@ -1012,9 +1075,65 @@ public LettuceClientConfigurationBuilderCustomizer configurationBuilderCustomize
 
 ### 散列插槽(slots)
 
+插槽的出现是为了解决**Redis分片集群中key的查找问题**、**数据转移**和**集群扩容**等问题。首先关于Redis分片集群中的key查找问题，由于不同节点存储不同数据，那么该去哪个节点查找key对应的值？或者说如果节点宕机，又没有哨兵，如何保证消息不丢失？
 
+插槽的出现就是为了解决这些问题，首先，Redis会把每一个master节点映射到0 ~ 16383共**16384**个插槽（hash hot）上（即每个节点**占领一部分插槽**）。而数据key通过**计算插槽值得知应该在哪个节点**，再转到目标节点上。
+
+Redis会根据 key 的**有效部分**计算插槽值，这里可以分为**两种情况**：
+
+- key 中包含“{}”，且“{}”中至少包含一个字符，那么“{}”中的部分就是有效成分
+- key 中不包含“{}”，整个key都是有效部分
+
+例如：key是num，那么就根据num计算，如果是{itcast}num，那么就根据itcast计算。计算方式是利用**CRC算法**得到一个hash值，然后对16384取余，得到的结果就是slot值。
+
+**举个例子**：分片集群模式，主节点7001、7002、7003分别占领插槽的一部分，然后在节点7001 set num 10，通过计算key的有效部分得到插槽值，发现该插槽值由7003占领，于是将数据存储到7003节点中。再set score 100，通过计算key的有效部分
+
+**如何将同一类数据固定的保存在同一个Redis实例中？**
+
+给这一类数据使用**相同的{typeId}**来计算插槽值即可。
+
+
+
+### 集群伸缩
+
+
+
+### 故障转移
+
+
+
+### RedisTemplate访问分片集群
 
 
 
 # 原理篇
 
+## 网络模型
+
+### 用户空间和内核空间
+
+
+
+
+
+### 阻塞IO
+
+
+
+### 非阻塞IO
+
+
+
+### IO多路复用
+
+
+
+### 信号驱动IO
+
+
+
+### 异步IO
+
+
+
+### Redis网络模型
