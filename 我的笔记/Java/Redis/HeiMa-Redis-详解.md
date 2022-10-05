@@ -87,18 +87,18 @@ Redis的特征有：
 
 ## SortedSet类型的常见命令
 
-|             命令             |                            描述                             |           举例           |
-| :--------------------------: | :---------------------------------------------------------: | :----------------------: |
-|    ZADD key score member     | 添加一个或多个元素到sorted set，如果已经存在则更新其score值 | ZADD stus 90 Amy 89 Mike |
-|       ZREM key member        |               删除sorted set中的一个指定元素                |      ZREM stus Mike      |
-|      ZSCORE key member       |             获取sorted set中的指定元素的score值             |     ZSCORE stus Amy      |
-|       ZRANK key member       |              获取sorted set中的指定元素的排名               |      ZRANK stus Amy      |
-|          ZCARD key           |                 获取sorted set中的元素个数                  |        ZCARD stus        |
-|      ZCOUNT key min max      |           统计score值在给定范围内的所有元素的个数           |    ZCOUNT stus 80 90     |
-| ZINCRBY key increment member |    让sorted set中的指定元素自增，步长为指定的increment值    |    ZINCRBY stus 5 Amy    |
-|      ZRANGE key min max      |          按照score排序后，获取指定排名范围内的元素          |     ZRANGE stus 0 2      |
-|  ZRANGEBYSCORE key min max   |         按照score排序后，获取指定score范围内的元素          | ZRANGEBYSCORE stus 80 90 |
-|     ZDIFF\ZINTER\ZUNION      |                   分别求差集、交集、并集                    |                          |
+|             命令             |                            描述                             |            举例             |
+| :--------------------------: | :---------------------------------------------------------: | :-------------------------: |
+|    ZADD key score member     | 添加一个或多个元素到sorted set，如果已经存在则更新其score值 | ZADD stus 90 Amy 89 Mike 85 |
+|       ZREM key member        |               删除sorted set中的一个指定元素                |       ZREM stus Mike        |
+|      ZSCORE key member       |             获取sorted set中的指定元素的score值             |       ZSCORE stus Amy       |
+|       ZRANK key member       |              获取sorted set中的指定元素的排名               |       ZRANK stus Amy        |
+|          ZCARD key           |                 获取sorted set中的元素个数                  |         ZCARD stus          |
+|      ZCOUNT key min max      |           统计score值在给定范围内的所有元素的个数           |      ZCOUNT stus 80 90      |
+| ZINCRBY key increment member |    让sorted set中的指定元素自增，步长为指定的increment值    |     ZINCRBY stus 5 Amy      |
+|      ZRANGE key min max      |          按照score排序后，获取指定排名范围内的元素          |       ZRANGE stus 0 2       |
+|  ZRANGEBYSCORE key min max   |         按照score排序后，获取指定score范围内的元素          |  ZRANGEBYSCORE stus 80 90   |
+|     ZDIFF\ZINTER\ZUNION      |                   分别求差集、交集、并集                    |                             |
 
 注意：所有的排名查询默认都是升序，如果要降序，则在命令的Z后添加REV即可，如ZREVRANGE key min max。
 
@@ -206,7 +206,7 @@ public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factor
 
 ### 2、StringRedisTemplate类
 
-如果使用RedisSerializer + JSON 序列化器，在存储 JSON 对象到Redis时会同时存入对象的全类名，相当占用空间，因此可以使用StringRedisTemplate + 手动转 JSON 的方式来优化。将对象手动转为JSON写入Redis中，在读取时，则手动将读取到JSON反序列化为对象。
+如果使用RedisSerializer + JSON 序列化器，在存储 JSON 对象到Redis时会同时存入对象的全类名，相当占用空间，因此可以使用StringRedisTemplate + 手动转 JSON 的方式来优化。将对象手动转为JSON写入Redis中，在读取时，则手动将读取到的JSON反序列化为对象。
 
 
 
@@ -301,7 +301,7 @@ public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factor
 
 ## 缓存击穿的解决思路
 
-缓存击穿也被称成为热点key问题，即一个被高并发访问并且缓存重建业务较为复杂的key突然失效，无数的请求访问会在瞬间给数据库带来巨大的压力。
+缓存击穿也被称成为热点key问题，即一个被高并发访问或缓存重建业务较为复杂的key突然失效，无数的请求访问会在瞬间给数据库带来巨大的压力。
 
 常见的解决方案有：
 
@@ -363,7 +363,7 @@ public long nextId(String keyPrefix){
 
 解决超卖问题常用方案是**加锁**，加锁可以选择**悲观锁**或**乐观锁**，悲观锁即在操作数据前先获取锁，确保线程串行执行，乐观锁即不加锁，只是在更新数据时判断有没有其它线程对数据做了修改。悲观锁有性能问题，因此可选的就是**乐观锁**。
 
-乐观锁杜判断之前查询得到的数据是否有被修改过有常用的有两种方式：**版本号法**和**CAS方案**。
+乐观锁判断之前查询得到的数据是否有被修改过有常用的有两种方式：**版本号法**和**CAS方案**。
 
 **版本号法**即在数据库中新增一个version字段，每次查询时连版本号一起查，修改时加上版本号进行判断：
 

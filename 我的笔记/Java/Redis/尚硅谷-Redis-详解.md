@@ -235,7 +235,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String，缩写为S
 1、lpush / rpush <key> <value1> <value2> <value3>
 	从左/右边向key对应的列表插入<value1>,<value2>,<value3>。如(向a列表中从左依次插入1,2,3): lpush a 1 2 3。最终list为3,2,1。
 2、lpop / rpop <key>
-	从左边/右边弹出key对应的列表的一个值，若值弹完，键亡。
+	从左边/右边弹出key对应的列表的一个值，若值弹完，列表亡。
 3、rpoplpush <key1> <key2>
 	从列表<key1>右边弹出一个值，插入<key2>的左边。
 4、lrange <key> <start> <stop>
@@ -343,7 +343,7 @@ Hash类型对应的数据结构为两种: zipList(压缩列表)，hashtable(哈�
 1、zadd <key> <score1> <value1> <score2> <value2>...
 	将一个或多个member元素及其score值加入到有序集合key中。
 2、zrange <key> <start> <stop> [WITHSCORES]
-	返回有序集key中，下标在<start>与<stop>之间的元元素，若携带[WITHSCORES]，则可以让分数一起和值返回到结果集。如(查询topn有序集合中带分数的所有元素): zrange topn 0 -1 withscores 
+	返回有序集key中，下标在<start>与<stop>之间的元素，若携带[WITHSCORES]，则可以让分数一起和值返回到结果集。如(查询topn有序集合中带分数的所有元素): zrange topn 0 -1 withscores 
 3、zrangebyscore <key> <min> <max> [withscores] [limit offset count]
 	返回有序集合key中的score处于<min>到<max>之间的元素，包括min和max。且返回元素按score从小到大排序。
 4、zrevrangebyscore <key> <max> <min> [withscores] [limit offset count]
