@@ -333,7 +333,7 @@ target
 
 依次点击File -> Settings -> Version Controller -> Git -> 找到git启动文件绑定 -> 测试成功
 
-![文件无法预览。](https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011200909388.png?Expires=1665491039&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=N1rA0r5Z3rqLz5FFCW7GTYLt%2FMs%3D)
+<img src="https://img1.imgtp.com/2022/10/11/1vFe4xnh.png" alt="image-20221011200909388.png" title="image-20221011200909388.png" />
 
 
 
@@ -341,23 +341,21 @@ target
 
 > IDEA设置好Git安装目录后，需要将项目交由Git管理，交给Git管理就无非初始化，添加到临时区，提交本地等等。
 
-
-
 #### 初始化
 
 > 使用IDEA将项目交给Git管理的操作（创建Git仓库，即初始化）：
 
-![文件无法预览。](https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011204945824.png?Expires=1665493140&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=zZertsuZEeWZI0W9h6mAR9BuYUw%3D)
+<img src="https://img1.imgtp.com/2022/10/11/zCeZIXh8.png" alt="image-20221011204945824.png" title="image-20221011204945824.png" />
 
 选中目标文件（点击OK进行目标文件Git的初始化）：
 
-<img src="https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011205532437.png?Expires=1665493342&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=VwIy5z6igQ0XmXI53fj%2BO5eiTVs%3D" alt="文件无法预览。" style="zoom:50%;" />
+<img src="https://img1.imgtp.com/2022/10/11/aoIFJz9u.png" alt="image-20221011205532437.png" title="image-20221011205532437.png" style="zoom:50%;" />
 
 #### 添加
 
 > 初始化成功后，右键项目会出现git选项，选择add加入暂存区。
 
-<img src="https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011210550381.png?Expires=1665493908&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=zVsn1dlZapmZ0s%2Fshb1HupZ4yLk%3D" alt="文件无法预览。" style="zoom: 33%;" />
+<img src="https://img1.imgtp.com/2022/10/11/bPl8CHWx.png" alt="image-20221011210550381.png" title="image-20221011210550381.png" style="zoom: 50%;" />
 
 
 
@@ -365,7 +363,7 @@ target
 
 > add到暂存区后，就是推送到本地库。
 
-![文件无法预览。](https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011211109366.png?Expires=1665494195&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=SUq459eEBfVrFh0Mb4E%2BPOCBkM0%3D)
+<img src="https://img1.imgtp.com/2022/10/11/ltk8LOUM.png" alt="image-20221011211109366.png" title="image-20221011211109366.png" />
 
 
 
@@ -373,7 +371,7 @@ target
 
 > IDEA中切换版本较为简单，点开IDEA下方的Git视图，点击Log，就可以查看所有的版本，想要切换版本，在目标版本上右键check即可。
 
-![文件无法预览。](https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011212237550.png?Expires=1665494889&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=tM71oSQzOfygFBeEUCCLKiJZMc0%3D)
+<img src="https://img1.imgtp.com/2022/10/11/7905DvbU.png" alt="image-20221011212237550.png" title="image-20221011212237550.png" />
 
 
 
@@ -385,9 +383,9 @@ target
 
 第一种，右键项目创建：
 
-<img src="https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011212757051.png?Expires=1665495223&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=pX9RFmopNSZjQyTkv5IJcmt%2Fan0%3D" alt="文件无法预览。" style="zoom:50%;" />
+<img src="https://img1.imgtp.com/2022/10/11/H8uXgXGN.png" alt="image-20221011212757051.png" title="image-20221011212757051.png" style="zoom: 50%;" />
 
-<img src="https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011213129298.png?Expires=1665495426&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=ihf3GyHvWZXT0YxA9cmqFrLB98s%3D" alt="文件无法预览。" style="zoom:50%;" />
+<img src="https://img1.imgtp.com/2022/10/11/XmyHVvgN.png" alt="image-20221011213129298.png" title="image-20221011213129298.png" style="zoom:50%;" />
 
 
 
@@ -399,7 +397,10 @@ target
 
 > 切换分支操作也简单，直接点击IDEA右下角分支，选择切换到的目标分支，点击切换即可
 
-![文件无法预览。](https://edu-20220510.oss-cn-beijing.aliyuncs.com/notes_pictures/image-20221011213357650.png?Expires=1665495606&OSSAccessKeyId=TMP.3KhjjMHDsT7SVqRUTwwXrUMWEgvym86h1usQdfhBLqqVg19DYjWKQ3HcDH3aFV7QbKU78rRvEXrRLxxYyvVNU7zuRUPk6y&Signature=D%2BY02XXNevUmUIcJBhDoZJCjXl8%3D)
+<img src="https://img1.imgtp.com/2022/10/11/Je29tVLP.png" alt="image-20221011213357650.png" title="image-20221011213357650.png" />
 
 
 
+### 6.6 IDEA分支合并
+
+> 分支合并分为正常合并和冲突合并。
