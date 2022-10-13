@@ -275,6 +275,20 @@
 
 
 
+### 5.6 GitHub的SSH免密登录
+
+> SSH免密登录，即使用SSH的地址进行操作，无需登录，但前提是GitHub账号上要保存用户生成的公钥。
+
+操作为首先在需要使用SSH登录的电脑的C:\Users\Lenovo目录下（或者叫做用户家目录）下生成一个.ssh文件，生成方式为在该文件夹处git bash here，然后通过算法生成（点击三次回车）：
+
+```
+ssh-ketgen -t rsa -C GitHub用户名
+```
+
+然后可以在该文件夹下看到生成的.ssh文件，里面有两个文件，id_rsa和id_rsa.pub，前者是私钥，后者是公钥，复制后者文件中的内容，来到GitHub中，点击 我的头像 -> Settings -> SSH and GPG keys -> New SSH key，将公钥内容复制进去，往后就可以通过SSH地址免密操作了。
+
+
+
 ## 六、IDEA集成Git
 
 > 工作中最长使用的方式。
@@ -404,3 +418,95 @@ target
 ### 6.6 IDEA分支合并
 
 > 分支合并分为正常合并和冲突合并。
+
+
+
+#### 正常合并
+
+> 比如两个分支，合并时没有冲突内容即正常合并。操作为点击右下方分支，找到目标分支，点击与当前分支合并。
+
+<img src="https://img1.imgtp.com/2022/10/11/il7Qilvw.png" alt="1665497442839.png" title="1665497442839.png" />
+
+
+
+#### 冲突合并
+
+> 当合并的代码出现冲突时，双击冲突代码，会出现三个窗口的代码，左边为其中一份冲突代码，右边为另一份冲突代码，中间为不包含冲突代码的代码，点击左边箭头可以将左边代码合并，点击右边建有可以将右边代码合并，都点即都合并，解决完冲突后点击apply即可自动提交，注意，未解决冲突不可再次操作。
+
+<img src="https://img1.imgtp.com/2022/10/11/3sjdg3Pm.png" alt="1665498154301.png" title="1665498154301.png" />
+
+
+
+## 七、IDEA集成GitHub
+
+> 首先IDEA中一般默认集成了GitHub，Settings -> Version Control -> GitHub，如果没有，则去插件中下载即可。第一次设置需要登录GitHub账号，或者通过token获取权限账号相关权限。账户生成token的方式为 点击GitHub头像 -> Settings -> Developer settings -> Personal access tokens，然后给token命名和赋予权限即可，注意：生成的token要及时保存。
+
+
+
+### 7.1 分享到GitHub
+
+> IDEA集成了GitHub插件，该插件为我们减免了在GitHub上创建远程仓库的操作，可以直接通过IDEA分享。该操作其实就是将创建远程仓库和推送合二为一。
+
+<img src="https://img1.imgtp.com/2022/10/11/ltmVbjXj.png" alt="1665499270574.png" title="1665499270574.png" />
+
+<img src="https://img1.imgtp.com/2022/10/11/34IISvbJ.png" alt="1665499373032.png" title="1665499373032.png" />
+
+
+
+### 7.2 推送代码到远程库
+
+> 7.1是直接将代码分享到GitHub，当本地代码有修改，再推送到远程库，也有多种操作，可以通过HTTPS进行推送（默认），也可以通过SSH免密推送到远程库。
+
+HTTPS推送则右键项目 -> Git -> Push 即可。
+
+SSH则右键项目 -> Git -> Push -> 单击别名 -> Define Remote
+
+<img src="https://img1.imgtp.com/2022/10/11/NOeyf37i.png" alt="1665501418103.png" title="1665501418103.png" />
+
+接下来推送就可以选择通过HTTPS（默认）还是SSH进行推送了。
+
+
+
+### 7.3 拉取远程库代码合并本地库
+
+> 假如远程库已经被其他人推送了，再提交就需要先拉取远程库下来，合并本地库，再进行提交。
+
+push是将本地库代码推送到远程库，如果本地库代码跟远程库代码版本不一致，push操作是会被拒绝的。也就是说，要想push成功，一定要保证本地库的版本要比远程库的版本高！因此一个成熟的程序员在动手该本地代码之前，一定会先检查下远程库跟本地代码的区别，如果本地的代码版本已经落后，切记要先pull拉取一下远程库的代码，将本地代码更新到最新以后，然后再修改，提交，推送。并且进行拉取前，最好不要对代码有其它修改，拉取后再做修改。
+
+相关操作即 Git -> Pull -> 选择HTTPS还是SSH拉取
+
+
+
+### 7.4 克隆代码到本地
+
+> 克隆操作一般都是平地起高楼时的操作，即初来咋到，克隆一份代码下来查看。直接通过IDEA初始页面的Get from Version Control进行克隆。
+
+<img src="https://img1.imgtp.com/2022/10/11/vUBHLjlD.png" alt="1665501944919.png" title="1665501944919.png" />
+
+
+
+## 八、GitLab
+
+> 可搭建在内网的Git仓库管理工具，由Ruby语言编写，后一部分被Go语言重写。
+
+### 8.1 GitLab安装
+
+> GitLab可以安装在Linux上，如Centos7或Ubuntu等，对服务器性能要求较高，当然也可以安装在docker或者k8s中。
+
+
+
+### 8.2 登录GitLab并创建远程库
+
+> GitLab刚安装好并启动时需要设置用户名为root的密码，密码必须包含大写、小写字母、特殊字符和数字。然后就可以进行登录了。登录完成就可以创建远程库了。
+
+
+
+### 8.3 IDEA集成GitLab
+
+> 首先IDEA集成GitLab需要安装GitLab插件，安装成功后点击 Settings -> Version Control -> GitLab -> 添加GitLab服务器地址。
+
+<img src="https://img1.imgtp.com/2022/10/11/czjwibpm.png" alt="1665503152946.png" title="1665503152946.png" />
+
+然后在push时再设置地址即可：
+
+<img src="https://img1.imgtp.com/2022/10/11/AP3kmc2W.png" alt="1665503261393.png" title="1665503261393.png" />
