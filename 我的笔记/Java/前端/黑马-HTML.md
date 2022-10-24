@@ -4,7 +4,7 @@
 
 ### 1.1 认识网页（了解）
 
-> 通过几个问题了解网页
+> 先通过几个问题来了解下网页
 
 **问题一：网页由哪些部分组成？**
 
@@ -26,7 +26,7 @@
 
 ### 1.2.1 五大浏览器
 
-> ### 浏览器：是网页显示、运行的平台，是前端开发必备利器
+> 浏览器：是网页显示、运行的平台，是前端开发必备利器
 
 常见的五大浏览器有：
 
@@ -105,9 +105,9 @@ vscode的使用很简单，直接将目标文件夹拖进vscode右边代码区�
 
 <img src="https://img1.imgtp.com/2022/10/17/qimlOFp9.png" alt="1665972130921.png" title="1665972130921.png" />
 
-在vscode中运行HTML文件也很简单，可以通过右键 -> Open In Default Browser或者快捷键Alt + B即可打开HTML文件到默认浏览器。
+在vscode中运行HTML文件也很简单，可以通过**右键 -> Open In Default Browser**或者快捷键**Alt + B**即可打开HTML文件到默认浏览器。
 
-<img src="https://img1.imgtp.com/2022/10/17/wZ1VvwTg.png" alt="1665972366836.png" title="1665972366836.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/wZ1VvwTg.png" alt="1665972366836.png" title="1665972366836.png" style="zoom: 50%;" />
 
 #### 2.2.1 vscode快捷键
 
@@ -140,7 +140,7 @@ vscode的使用很简单，直接将目标文件夹拖进vscode右边代码区�
 
 > 程序员在写代码时也会添加注释，方便下次看到此处时想起功能和含义。注释既是给自己看的，也是给同事或者其它程序员看的。注释不会对代码产生影响，不会被解析执行。
 
-vscode提供了快捷注释按键：ctrl + /
+vscode提供了快捷注释按键：**ctrl + /**
 
 <img src="https://img1.imgtp.com/2022/10/17/kVSLCMkZ.png" alt="1665972848652.png" title="1665972848652.png" />
 
@@ -215,7 +215,7 @@ vscode提供了快捷注释按键：ctrl + /
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/csyymCmO.png" alt="1665975604122.png" title="1665975604122.png" style="zoom: 33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/csyymCmO.png" alt="1665975604122.png" title="1665975604122.png" style="zoom: 50%;" />
 
 执行效果：
 
@@ -243,7 +243,7 @@ vscode提供了快捷注释按键：ctrl + /
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/CHjSCQ5R.png" alt="1665976567855.png" title="1665976567855.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/CHjSCQ5R.png" alt="1665976567855.png" title="1665976567855.png" style="zoom: 50%;" />
 
 执行效果：
 
@@ -270,7 +270,7 @@ vscode提供了快捷注释按键：ctrl + /
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/WaizVdmm.png" alt="1665976984974.png" title="1665976984974.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/WaizVdmm.png" alt="1665976984974.png" title="1665976984974.png" style="zoom: 50%;" />
 
 执行效果：
 
@@ -299,13 +299,13 @@ vscode提供了快捷注释按键：ctrl + /
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/K0pDm47q.png" alt="1665977332689.png" title="1665977332689.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/K0pDm47q.png" alt="1665977332689.png" title="1665977332689.png" style="zoom: 50%;" />
 
 执行效果：
 
 <img src="https://img1.imgtp.com/2022/10/17/zsqL5veH.png" alt="1665977365390.png" title="1665977365390.png" />
 
-## 2、文本格式化标签
+## 2、文本标签
 
 > 对文本的相关操作，如加粗、下划线、倾斜、删除线等效果，具体有两种场景的代码，区别是是否需要突出该位置的重要性，在显示方面没有区别。
 
@@ -316,7 +316,7 @@ vscode提供了快捷注释按键：ctrl + /
 | <i>  |  倾斜  |        <em>        |  倾斜  |
 | <s>  | 删除线 |       <del>        | 删除线 |
 
-<img src="https://img1.imgtp.com/2022/10/17/kaeBVLXq.png" alt="1665994811836.png" title="1665994811836.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/kaeBVLXq.png" alt="1665994811836.png" title="1665994811836.png" style="zoom: 50%;" />
 
 执行效果：
 
@@ -328,7 +328,7 @@ vscode提供了快捷注释按键：ctrl + /
 
 > 即在网页中显示目标图片。其特点是**单标签**，并且需要借助标签的属性设置来展示对应的效果，很多标签都可以通过属性来**指定显示效果**。
 
-代码：
+代码（图片标签）：
 
 ```html
 <!--img是图片标签名，src=""是其属性，src是该属性的属性名，""中的是它的属性值-->
@@ -336,7 +336,7 @@ vscode提供了快捷注释按键：ctrl + /
 <img src="" alt="">
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/TcV1pK88.png" alt="1665995912293.png" title="1665995912293.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/TcV1pK88.png" alt="1665995912293.png" title="1665995912293.png" style="zoom: 50%;" />
 
 [^注]: 上图中所使用的src=“”路径是相对路径，**相对路径**是指相对当前目录下的其它目录，可以为上级目录（一级目录一个../，如上一级为../th.jfif），可以为同级目录（不写文件或写成./，如th.jfif或者./th.jfif），或者下级目录（/文件名/文件，如/cat/th.jfif）。还有一种方式是设置为**绝对路径**，绝对路径是指从盘符（如C:/）开始一直到目标位置的路径。
 
@@ -370,13 +370,13 @@ vscode提供了快捷注释按键：ctrl + /
 
 > 在页面中插入音频。需要注意音频标签的部分属性需要谨慎设置，如自动播放，目前音频标签只支持三种格式：MP3、Wav、Ogg。
 
-代码：
+代码（音频标签）：
 
 ```html
 <audio src="./door_bell.mp3" controls autoplay loop></audio>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/ks7iqMyw.png" alt="1665998150456.png" title="1665998150456.png" style="zoom:33%;" />
+<img src="https://img1.imgtp.com/2022/10/17/ks7iqMyw.png" alt="1665998150456.png" title="1665998150456.png" style="zoom: 50%;" />
 
 执行效果：
 
@@ -394,3 +394,488 @@ vscode提供了快捷注释按键：ctrl + /
 
 
 ### 3.3 视频标签
+
+> 在页面中插入视频。同样设置自动播放属性时要谨慎设置，目前视频标签只支持三种格式：MP4、WebM、Ogg。
+
+代码（视频标签）：
+
+```html
+<video src="./movie.mp4" controls autoplay muted loop></video>
+```
+
+<img src="https://img1.imgtp.com/2022/10/17/77BeOZVw.png" alt="1665999330810.png" title="1665999330810.png" style="zoom: 50%;" />
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/UAKDohrx.png" alt="1665999361917.png" title="1665999361917.png" />
+
+#### 常用属性
+
+|   属性   |                            功能                             |
+| :------: | :---------------------------------------------------------: |
+|   src    |                         视频的路径                          |
+| controls |                       显示播放的控件                        |
+| autoplay | 自动播放（谷歌浏览器需要配合加上muted属性实现静音自动播放） |
+|   loop   |                          循环播放                           |
+
+
+
+## 4、链接标签
+
+> 链接的作用是进行跳转，跳转对象可以是一个网址，可以是一个文件，也可以什么都不是。其特点是这是一个双标签，内部可以包括内容，链接放在a标签中，点击a标签内容之后跳到指定页面。
+
+代码（链接标签）：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 跳转网址 -->
+    <a href="https://www.baidu.com" target="_blank">百度</a>
+    <br>
+    <!-- 跳转本地地址 -->
+    <a href="./th.jfif" target="_blank">猫猫</a>
+    <br>
+    <!-- 空链接（一般在网站开发初期，我们还不知道跳转地址时，则书写链接地址为#） -->
+    <a href="#" target="_blank">哪也不去</a>
+</body>
+</html>
+```
+
+执行效果：
+
+![image-20221017183208403](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20221017183208403.png)
+
+[^注]: 如果想要点击链接之后另外起一个网页展示链接内容，则可以配置a标签的target属性，当target=“_blank”时效果为在新窗口中跳转，会保留下原网页。当target=“_self”时，也是跳转标签的默认值，会直接在原网页上加载链接内容，覆盖掉原网页。
+
+
+
+## 5、列表标签
+
+> 用来按照固定格式展示数据的一种标签，一共有**三种**不同的列表标签，分别是**无序列表**、**有序列表**和**自定义列表**。
+
+### 5.1 无序列表
+
+> 在网页中的表示就是一组无顺序之分的列表，其特点是列表的每一项前默认显示的是**圆点**。
+
+**标签组成**：
+
+| 标签名 |                说明                |
+| :----: | :--------------------------------: |
+|   ul   | 作为无序列表的整体，用于包裹li标签 |
+|   li   |           表示一个无序行           |
+
+注 ul标签中只允许包含li标签，li标签可以包含**任意内容**（可以包括另一个ul或其它）
+
+**代码（无序列表）**：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>水果列表</h2>
+    <ul>
+        <li>榴莲</li>
+        <li>香蕉</li>
+        <li>苹果</li>
+        <li>哈密瓜</li>
+        <li>火龙果</li>
+    </ul>
+</body>
+</html>
+```
+
+**执行效果**：
+
+<img src="https://img1.imgtp.com/2022/10/17/acY06c5p.png" alt="1666012746277.png" title="1666012746277.png" />
+
+### 5.2 有序列表
+
+> 在网页中表示一组有顺序之分的列表数据，特点是列表的每一项前默认都会显示序号标识。
+
+**标签组成**：
+
+| 标签名 |              说明              |
+| :----: | :----------------------------: |
+|   ol   | 有序列表的整体，用来包裹li标签 |
+|   li   |         表示一个有序行         |
+
+[^注]: ol标签中只允许包含li标签，li标签可以包含**任意内容**
+
+**代码**：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>成绩排行</h2>
+    <ol>
+        <li>小天</li>
+        <li>小丽</li>
+        <li>小明</li>
+    </ol>
+</body>
+</html>
+```
+
+**执行效果**：
+
+<img src="https://img1.imgtp.com/2022/10/17/v5OfrQNT.png" alt="1666013443938.png" title="1666013443938.png" />
+
+### 5.3 自定义列表
+
+> 通常有些列表我们不希望使用有序或无序时就可以使用自定义列表，这种列表也会用于网页底部的导航，其特点是默认情况下dt与dd之间有缩进效果。
+
+**标签组成**：
+
+| 标签名 |                说明                 |
+| :----: | :---------------------------------: |
+|   dl   | 自定义列表的整体，用于包裹dt/dd标签 |
+|   dt   |          自定义列表的主题           |
+|   dd   |     自定义列表中对应主题的内容      |
+
+[^注]: dl标签中只允许包含dt/dd标签，dt/dd标签可以包含**任意内容**
+
+**代码**：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <dl>
+        <dt>帮助中心</dt>
+        <dd>购物指南</dd>
+        <dd>账户管理</dd>
+        <dd>订单列表</dd>
+    </dl>
+</body>
+</html>
+```
+
+**效果展示**：
+
+![image-20221017214106584](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20221017214106584.png)
+
+## 6、表格标签
+
+> 将表格以标签形式表现出来，在网页中以行+列的单元格的方式展示数据，比如：学生成绩表。
+
+### **基本标签**
+
+| 标签名 |              说明              |
+| :----: | :----------------------------: |
+| table  |    表格整体，可以包含多个tr    |
+|   tr   |    表格每行，可以包含多个td    |
+|   td   | 表格的单元格，可以包含具体内容 |
+
+[^注]: 标签中的嵌套关系为：table > tr > td
+
+和表格**搭档**的其它标签：
+
+| 标签名  |    名称    |                           作用                           |
+| :-----: | :--------: | :------------------------------------------------------: |
+| caption |  表格标题  |  一般写在table标签里，作为表格的标题，展示在表格正上方   |
+|   th    | 表头单元格 | 与td标签类似，区别在th内容**居中且加粗**，一般作为列标题 |
+
+表格中还存在一种**结构标签**，结构标签的作用主要是让代码**易于辨识**，即告诉开发者哪部分是表格标题，哪部分是表格内容，哪部分是表格末尾，浏览器仅会对其各自所占大小做相应处理，让表格内容部分占据更多空间。
+
+| 标签名 |                名称                |
+| :----: | :--------------------------------: |
+| thread | 表格头部，一般用其包裹表格标题部分 |
+| tbody  | 表格主题，一般用其包裹表格内容部分 |
+| tfoot  | 表格底部，一般用其包裹表格底部内容 |
+
+```html
+<table border="1" width="500" height="300">
+    <caption>学生成绩单</caption>
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>成绩</th>
+            <th>评语</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>小明</td>
+            <td>100分</td>
+            <td>可喜可贺</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>总结</td>
+            <td>A+</td>
+            <td>三好学生</td>
+        </tr>
+    </tfoot>
+</table>
+```
+
+
+
+### 表格属性
+
+> 表格也具有相关属性，可以设置表格基本的展示效果，以下是较为常用的属性。
+
+| 属性名 | 属性值 |    效果    |
+| :----: | :----: | :--------: |
+| border |  数字  | 边框的宽度 |
+| width  |  数字  | 表格的宽度 |
+| height |  数字  | 表格的高度 |
+
+[^注]: 实际开发时最好针对具体的样式使用CSS进行设置
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width="500" height="300">
+        <caption>学生成绩单</caption>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>成绩</th>
+                <th>评语</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>小明</td>
+                <td>100分</td>
+                <td>可喜可贺</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>总结</td>
+                <td>A+</td>
+                <td>三好学生</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
+```
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/InwY8G6I.png" alt="1666016573056.png" title="1666016573056.png" />
+
+### 表格合并
+
+> 表格合并可以分为**水平合并**（跨列合并）和**垂直合并**（跨行合并）。注意合并单元格只能在**同一个结构标签中**的单元格才能合并，不能跨结构标签合并，即不能跨像thead、tbody、tfoot这样的结构标签合并单元格。
+
+合并单元格的**步骤**：
+
+1. 先明确要合并哪几个单元格。
+
+2. 通过**左上原则**，来确定保留哪个删除哪个，即单元格合并只能保留左边或者上边的。
+
+   1. 上下合并：保留最上的，删除其他
+   2. 左右合并：保留最左的，删除其它
+
+3. 给保留的那个单元格设置：**跨行合并**（rowspan）或者**跨列合并**（colspan）
+
+   | 属性名  |       属性值       |                          说明                          |
+   | :-----: | :----------------: | :----------------------------------------------------: |
+   | rowspan | 合并的单元格的个数 | 跨行合并，将多行的单元格进行垂直合并，并保留最上面那个 |
+   | colspan | 合并的单元格的个数 | 跨列合并，将多列的单元格进行水平合并，并保留做左边那个 |
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width="500" height="300">
+        <caption>学生成绩单</caption>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>成绩</th>
+                <th>评语</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>小明</td>
+                <td rowspan="2">100分</td>
+                <td rowspan="2">可喜可贺</td>
+            </tr>
+            <tr>
+                <td>小李</td>
+                <!-- <td>100分</td> -->
+                <!-- <td>可喜可贺</td> -->
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>总结</td>
+                <td colspan="2">A+</td>
+                <!-- <td>三好学生</td> -->
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
+```
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/G7GsERzC.png" alt="1666018876020.png" title="1666018876020.png" />
+
+## 7、表单标签
+
+> 当业务中出现登录、注册或者搜索相关功能时需要考虑加上的标签。功能是向后端发送用户输入的数据。
+
+### 7.1 input系列标签
+
+> 用于对用户输入或选择的数据进行收集，可以根据设置input标签的属性来展示不同的显示效果。在用户登录页、注册页使用较多。
+
+input标签重要的属性有 **type** 属性，其不同的值对应不同的展示和收集效果。
+
+| type属性值 |                             说明                             |
+| :--------: | :----------------------------------------------------------: |
+|    text    |             表示一个文本框，可以用于输入单行文本             |
+|  password  | 表示一个密码框，可以用来输入密码，输入的数据显示时默认用小圆点代替 |
+|   radio    |             表示单选框，用于多选一，且只能选一个             |
+|  checkbox  |              表示多选框，用于多选多，可以选多个              |
+|    file    |                   文件选择，可用于上传文件                   |
+|   submit   |             提交按钮，可以用于此处数据收集的提交             |
+|   reset    |               重置按钮，可以将原输入的数据重置               |
+|   button   |           普通按钮，可以配合js绑定事件，默认无功能           |
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    文本框：<input type="text"><br>
+    密码框：<input type="password"><br>
+    单选框：<input type="radio"></input><br>
+    多选框：<input type="checkbox"><br>
+    文件选择：<input type="file"><br>
+    <input type="submit">
+    <input type="reset">
+    <input type="button" value="普通按钮">
+</body>
+</html>
+```
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/Y1Rt2JaB.png" alt="1666021083998.png" title="1666021083998.png" />
+
+#### 7.1.1 文本框text
+
+> 一般用在网页中对于输入单行文本的内容收集，可以用于用户名输入或者其它允许显示展示的单行输入。属于input标签的type属性的一种。
+
+常用的 input **搭配属性**：
+
+|   属性名    |                      说明                      |
+| :---------: | :--------------------------------------------: |
+| placeholder | 占位符。提示用户输入内容，用户输入内容后消失。 |
+
+[^注]: placeholder属性可以针对input标签中多个type进行使用，作用是提示用户输入，一般text、password都可以使用。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="用户名"><br>
+    <input type="password" placeholder="请输入密码">
+</body>
+</html>
+```
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/4MgZOj17.png" alt="1666021512423.png" title="1666021512423.png" />
+
+#### 7.1.2 单选框radio
+
+> 用于当需要多选一的单选表单中，比如性别选择。
+
+常用的 **input** 搭配属性：
+
+| 属性名  |                             说明                             |
+| :-----: | :----------------------------------------------------------: |
+|  name   | 用于分组。有相同name属性值的单选框为一组，一组中同时只能有一个被选中 |
+| checked |                 一般用于设置默认选中的单选框                 |
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    性别：
+    <input type="radio" name="gender" checked>男</input>
+    <input type="radio" name="gender">女</input>
+</body>
+</html>
+```
+
+执行效果：
+
+<img src="https://img1.imgtp.com/2022/10/17/HkOKtdWP.png" alt="1666022011580.png" title="1666022011580.png" />
