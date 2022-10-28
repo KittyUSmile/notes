@@ -181,6 +181,26 @@ vscode提供了快捷注释按键：**ctrl + /**
 <body></body>
 ```
 
+## 4、字符实体
+
+> 字符实体指的是通过字符表示一个既定的符号，一般用于有编译冲突的字符。比如浏览器最多只识别一个HTML中的空格，要想多打几个空格，则使用符号&nbsp ； 即可。
+
+字符实体的结构是：&英文;
+
+常见的字符实体有：
+
+| 显示结果 |  描述  | 实体名称 |
+| :------: | :----: | :------: |
+|          |  空格  | &nbsp ;  |
+|    <     | 小于号 |  &lt ;   |
+|    >     | 大于号 |  &gt ;   |
+|    &     |  和号  |  &amp ;  |
+|    “     |  引号  | &quot ;  |
+|    ‘     | 单引号 | &apos ;  |
+|    ￥    |   元   |  &yen ;  |
+
+
+
 
 
 # 二、HTML标签学习
@@ -767,9 +787,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 > 当业务中出现登录、注册或者搜索相关功能时需要考虑加上的标签。功能是向后端发送用户输入的数据。
 
-### 7.1 input系列标签
+### 7.1、input 系列标签
 
-> 用于对用户输入或选择的数据进行收集，可以根据设置input标签的属性来展示不同的显示效果。在用户登录页、注册页使用较多。
+> 用于对用户输入或选择的数据进行收集，可以根据设置input标签的属性来使用不同的功能。在用户登录页、注册页使用较多。
 
 input标签重要的属性有 **type** 属性，其不同的值对应不同的展示和收集效果。
 
@@ -812,9 +832,9 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 
 <img src="https://img1.imgtp.com/2022/10/17/Y1Rt2JaB.png" alt="1666021083998.png" title="1666021083998.png" />
 
-#### 7.1.1 文本框text
+#### 7.1.1 文本框 text
 
-> 一般用在网页中对于输入单行文本的内容收集，可以用于用户名输入或者其它允许显示展示的单行输入。属于input标签的type属性的一种。
+> 一般用在网页中对于输入单行文本的内容收集，可以用于用户名输入或者其它允许显示展示的单行输入。属于input标签的type属性的一种。type=“text”。
 
 常用的 input **搭配属性**：
 
@@ -846,9 +866,9 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 
 <img src="https://img1.imgtp.com/2022/10/17/4MgZOj17.png" alt="1666021512423.png" title="1666021512423.png" />
 
-#### 7.1.2 单选框radio
+#### 7.1.2 单选框 radio
 
-> 用于当需要多选一的单选表单中，比如性别选择。
+> 用于当需要多选一的单选表单中，比如性别选择。type=“radio”
 
 常用的 **input** 搭配属性：
 
@@ -879,3 +899,296 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 执行效果：
 
 <img src="https://img1.imgtp.com/2022/10/17/HkOKtdWP.png" alt="1666022011580.png" title="1666022011580.png" />
+
+#### 7.1.3 文件上传 file
+
+> 需要上传文件时使用，允许单个和多个文件的上传。默认是单文件上传。type=“file”。
+
+常用的搭配属性：
+
+|  属性名   |        说明        |
+| :-------: | :----------------: |
+| multifile | 允许选择多文件上传 |
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    文件上传：<input type="file" multiple></input>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b78a10f447.png" alt="1666939034515.png" title="1666939034515.png" />
+
+#### 7.1.4 提交 submit/重置 reset
+
+> input标签中type为 submit、reset、button的都是按钮，其中 submit 和 reset 一般和表单一起使用，而普通 button 按钮则绑定 JS 一起使用。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        账号：<input type="text"><br>
+        密码：<input type="password"><br><br>
+        <!-- value属性设置该标签展示的名字 -->
+        <input type="reset" value="重置按钮">
+        <input type="submit" value="提交按钮">
+        <input type="button" value="普通按钮">
+    </form>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b7cb9a2985.png" alt="1666940085561.png" title="1666940085561.png" />
+
+### 7.2、button 按钮系列
+
+> 按钮也有一个 type 类型的属性，可取submit、reset、button值，效果和 input 中的相同。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="submit">提交</button>
+    <button type="reset">重置</button>
+    <button type="button">普通按钮</button>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b7eaae1539.png" alt="1666940583925.png" title="1666940583925.png" />
+
+### 7.3、select 下拉菜单标签
+
+> 提供用户下拉选择的表单控件。
+
+标签组成：
+
+- select 标签：下拉菜单的整体（父）
+- option 标签：下拉菜单的每一项（子）
+
+常见属性：
+
+- selected：下拉菜单的默认选中
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select>
+        <option>滑冰</option>
+        <option>开车</option>
+        <option selected>游泳</option>
+    </select>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b80e20e489.png" alt="1666941150238.png" title="1666941150238.png" />
+
+### 7.4、textarea 文本域标签
+
+> 在网页中提供可输入多行文本的表单控件。标签名为textarea。该标签通过设置属性行宽可能不准确，一般使用中都是通过CSS标签来设置。
+
+常见属性：
+
+- cols：设置文本域内可见宽度
+- rows：设置文本域内可见行数
+
+注意点：
+
+- 右下角可以拖拽改变大小
+- 实际开发时针对样式效果推荐采用CSS设置
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea cols="30" rows="10"></textarea>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b82a78c2c6.png" alt="1666941603383.png" title="1666941603383.png" />
+
+
+
+### 7.5、label 标签
+
+> 一般用于绑定标签内容和标签之间的关系。标签名为 label。
+
+在使用时有两种使用方法。
+
+##### **方法一**
+
+1. 使用 label 标签把标签内容包起来。
+2. 在表单标签添加上 id 属性。
+3. 在 label 标签中的 for 属性中设置和 id 属性对应的值。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    性别：
+    <input type="radio" name="gender" id="nan"><label for="nan">男</label></label></input>
+    <input type="radio" name="gender" id="nv"><label for="nv">女</label></input>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b865de94ac.png" alt="1666942554590.png" title="1666942554590.png" />
+
+##### 方法二
+
+1. 直接使用 label 标签把表单内容和表单标签一起包裹起来
+2. 需要把 label 标签的 for 属性删除即可
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    性别：
+    <label>
+        <input type="radio" name="gender">男</input>
+    </label>
+    <label>
+        <input type="radio" name="gender">女</input>
+    </label>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b885d12938.png" alt="1666943065595.png" title="1666943065595.png" />
+
+## 8、语义化标签
+
+> 语义化标签其实就是布局标签，用来对网页分块布局使用，可以分为无语义的布局标签和有语义的布局标签。含语义和不含语义的区别是该标签是否被认为赋予了某种含义。
+
+### 无语义布局标签
+
+> 一般而言就是<div>和<span>两个标签。其中 div 标签在同一行只能显示一个（独占一行），span 标签一行可以显示多个。默认这些标签都是没有任何效果的，如果要加上颜色或其它效果，使用CSS即可。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>这是div标签</div>
+    <div>这是div标签</div>
+
+    <span>这是span标签</span>
+    <span>这是span标签</span>
+</body>
+</html>
+```
+
+<img src="https://img.00000.host/2022/10/28/635b8ef889efa.png" alt="1666944755889.png" title="1666944755889.png" />
+
+
+
+### 含语义布局标签
+
+> 含语义标签在HTML5时推出，多用于手机端。这些含语义的标签虽然被赋予了某种含义，但是仍然要通过CSS来设置样式和效果。
+
+标签：
+
+| 标签名  |    语义    |
+| :-----: | :--------: |
+| header  |  网页头部  |
+|   nav   |  网页导航  |
+| footer  |  网页底部  |
+|  aside  | 网页侧边栏 |
+| section |  网页区块  |
+| article |  网页文章  |
+
+[^注]: 以上标签显示特点和 div 一致，但是比 div 多了被赋予的语义。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>网页头部</header>
+    <nav>网页导航</nav>
+    <footer>网页底部</footer>
+    <aside>网页侧边栏</aside>
+    <section>网页区块</section>
+    <article>网页文章</article>
+</body>
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_170358.png"/>
+

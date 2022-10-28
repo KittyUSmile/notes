@@ -100,7 +100,7 @@ Hibernate特点：
 
 #### 实体类
 
-> 在 JPA 入门和Spring Data JPA中使用的实体类都是以下实体类。
+> 在 JPA 入门和Spring Data JPA中使用的实体类。
 
 ```java
 package com.run.entity;
@@ -1377,7 +1377,7 @@ public void testSpecification(){
 @Test
 public void testIn(){
     List<Customer> all = specificationDao.findAll((Specification<Customer>) (root, query, criteriaBuilder) -> {
-        //            Path<Long> id = root.get("id");
+        //Path<Long> id = root.get("id");
         Expression<Long> id = root.get("id").as(Long.class);
         //传入需要 in 的属性字段
         CriteriaBuilder.In<Long> in = criteriaBuilder.in(id);
