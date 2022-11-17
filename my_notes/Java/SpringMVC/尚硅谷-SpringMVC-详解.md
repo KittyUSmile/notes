@@ -420,7 +420,8 @@ public String testShareApplication(HttpSession session){
 
 # 七、HttpMessageConverter
 
-报文信息转换器。将接收的请求报文转换为Java对象，或Java对象转换为响应报文。
+> 报文信息转换器。将接收的请求报文转换为Java对象，或Java对象转换为响应报文。
+>
 
 HttpMessageConverter为此提供了两个注解和两个类型：@RequestBody、@ResponseBody、RequestEntity、ResponseEntity。
 

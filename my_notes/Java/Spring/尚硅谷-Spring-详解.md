@@ -594,7 +594,8 @@ System.out.println(bean1 == bean2);
 
 ## 5、Bean的生命周期
 
-即bean从被创建到被销毁的完成过程。完成而言一共有七步。bean的生命周期可以理解为Spring创建这个bean时的操作顺序。
+> 即bean从被创建到被销毁的完成过程。完成而言一共有七步。bean的生命周期可以理解为Spring创建这个bean的过程和在各过程会执行的操作。
+>
 
 以单例bean为例：
 

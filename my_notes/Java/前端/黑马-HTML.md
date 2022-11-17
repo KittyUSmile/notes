@@ -24,7 +24,7 @@
 
 
 
-### 1.2.1 五大浏览器
+### 1.2 五大浏览器
 
 > 浏览器：是网页显示、运行的平台，是前端开发必备利器
 
@@ -40,7 +40,7 @@
 
 
 
-#### 1.2.2 渲染引擎
+#### 1.2.1 渲染引擎
 
 > 渲染引擎（浏览器内核）：浏览器中专门对代码进行解析渲染的部分，不同浏览器的渲染引擎也是不同的，而渲染引擎不同，解析相同代码时的速度、性能、效果也相同。
 
@@ -53,13 +53,13 @@
 
 
 
-### 1.3.1 Web标准引入
+### 1.3 Web标准引入
 
 > Web标准其实是为了解决不同浏览器渲染引擎不同，对代码解析效果会存在差异的问题，即引入Web标准让不同浏览器按照相同的标准显示结果，让展示的效果统一。
 
 
 
-#### 1.3.2 Web标准构成
+#### 1.3.1 Web标准构成
 
 | 构成 |    语言    |                        说明                        |
 | :--: | :--------: | :------------------------------------------------: |
@@ -103,22 +103,20 @@
 
 vscode的使用很简单，直接将目标文件夹拖进vscode右边代码区即可，并且vscode具有快捷操作，输入!然后回车或者tab即可自动生成HTML页面骨架。
 
-<img src="https://img1.imgtp.com/2022/10/17/qimlOFp9.png" alt="1665972130921.png" title="1665972130921.png" />
-
 在vscode中运行HTML文件也很简单，可以通过**右键 -> Open In Default Browser**或者快捷键**Alt + B**即可打开HTML文件到默认浏览器。
-
-<img src="https://img1.imgtp.com/2022/10/17/wZ1VvwTg.png" alt="1665972366836.png" title="1665972366836.png" style="zoom: 50%;" />
 
 #### 2.2.1 vscode快捷键
 
 > 记录vscode中较为常用的快捷键
 
-|  快捷键  |                             作用                             |
-| :------: | :----------------------------------------------------------: |
-| Alt + b  |                  打开此HTML文件到默认浏览器                  |
-| Ctrl + c | 复制（在vscode中该快捷键和Ctrl + v可以**行后**使用做到复制粘贴） |
-| Ctrl + v |                             粘贴                             |
-| Ctrl + d |         可以多选目标内容进行同时操作（多次按下即可）         |
+|     快捷键      |                             作用                             |
+| :-------------: | :----------------------------------------------------------: |
+|     Alt + b     |                  打开此HTML文件到默认浏览器                  |
+|    Ctrl + c     | 复制（在vscode中该快捷键和Ctrl + v可以**行后**使用做到复制粘贴） |
+|    Ctrl + v     |                             粘贴                             |
+|    Ctrl + d     |         可以多选目标内容进行同时操作（多次按下即可）         |
+| Shift + Alt + F |                          格式化代码                          |
+|   Alt + Shift   |                            多选行                            |
 
 
 
@@ -142,8 +140,6 @@ vscode的使用很简单，直接将目标文件夹拖进vscode右边代码区�
 
 vscode提供了快捷注释按键：**ctrl + /**
 
-<img src="https://img1.imgtp.com/2022/10/17/kVSLCMkZ.png" alt="1665972848652.png" title="1665972848652.png" />
-
 
 
 ### 3.2 HTML标签构成
@@ -155,10 +151,6 @@ vscode提供了快捷注释按键：**ctrl + /**
 1. 标签由**<、>、/、英文单词或字母**组成，并且把标签中<>包括起来的英文单词或字母称为**标签名**。
 2. 常见标签由两部分组成，我们称之为：**双标签**。前部分叫**开始标签**，后部分叫**结束标签**（结束标签带有/），这其中包裹内容。
 3. 少数标签由一部分组成，我们称之为：**单标签**。自称一体，无法包括内容。
-
-标签结构图：
-
-<img src="https://img1.imgtp.com/2022/10/17/lK21Suvm.png" alt="1665973632776.png" title="1665973632776.png" />
 
 
 
@@ -209,7 +201,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 ## 1、排版标签
 
-### 1.1 标题标签
+### 1、标题标签
 
 > 标题在HTLM标签中十分重要，主要用来突出页面主题，HTML一共定义了**六个**标题标签，从一级到六级，重要程度依次递减。标题标签的特点是：文字都有**加粗增大**，但从h1 -> h6逐渐减小，并且是**独占一行**的。
 
@@ -235,15 +227,13 @@ vscode提供了快捷注释按键：**ctrl + /**
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/csyymCmO.png" alt="1665975604122.png" title="1665975604122.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/eqIno43j.png" alt="1665975685738.png" title="1665975685738.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112501.png"/>
 
-### 1.2 段落标签
+### 2、段落标签
 
-> 常用作分段显示，使用时其特点是段落之间（其它标签也会）会**存在间隙**，并且同时**独占行**。
+> 常用作分段显示，使用时其特点是段落之间（其它标签也会）会**存在间隙（上下之间）**，并且同时**独占行**。
 
 代码（分段标签）：
 
@@ -263,13 +253,11 @@ vscode提供了快捷注释按键：**ctrl + /**
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/CHjSCQ5R.png" alt="1665976567855.png" title="1665976567855.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/EuGjiFU7.png" alt="1665976604635.png" title="1665976604635.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112542.png"/>
 
-### 1.3 换行标签
+### 3、换行标签
 
 > 作用是针对此行强制换行。特点是换行标签是**单标签**，并会进行强制换行。
 
@@ -290,13 +278,11 @@ vscode提供了快捷注释按键：**ctrl + /**
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/WaizVdmm.png" alt="1665976984974.png" title="1665976984974.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/aKXVcmB8.png" alt="1665977014064.png" title="1665977014064.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112626.png"/>
 
-### 1.4 水平分割线
+### 4、水平分割线
 
 > 多用在不同主题内容之间进行分割，显示效果就是一条水平的细线。特点是**单标签**。
 
@@ -319,11 +305,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 </html>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/K0pDm47q.png" alt="1665977332689.png" title="1665977332689.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/zsqL5veH.png" alt="1665977365390.png" title="1665977365390.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112702.png"/>
 
 ## 2、文本标签
 
@@ -336,11 +320,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 | <i>  |  倾斜  |        <em>        |  倾斜  |
 | <s>  | 删除线 |       <del>        | 删除线 |
 
-<img src="https://img1.imgtp.com/2022/10/17/kaeBVLXq.png" alt="1665994811836.png" title="1665994811836.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/8CNPQZ1U.png" alt="1665994847550.png" title="1665994847550.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112739.png"/>
 
 ## 3、媒体标签
 
@@ -362,7 +344,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/9QHYbvrr.png" alt="1665995951523.png" title="1665995951523.png" style="zoom:33%;" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_112821.png"/>
+
+
 
 #### 常用属性
 
@@ -396,11 +380,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 <audio src="./door_bell.mp3" controls autoplay loop></audio>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/ks7iqMyw.png" alt="1665998150456.png" title="1665998150456.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/ElgvouX1.png" alt="1665998209975.png" title="1665998209975.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140014.png"/>
 
 #### 常用属性
 
@@ -423,11 +405,9 @@ vscode提供了快捷注释按键：**ctrl + /**
 <video src="./movie.mp4" controls autoplay muted loop></video>
 ```
 
-<img src="https://img1.imgtp.com/2022/10/17/77BeOZVw.png" alt="1665999330810.png" title="1665999330810.png" style="zoom: 50%;" />
-
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/UAKDohrx.png" alt="1665999361917.png" title="1665999361917.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140109.png"/>
 
 #### 常用属性
 
@@ -470,7 +450,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 执行效果：
 
-![image-20221017183208403](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20221017183208403.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140234.png"/>
 
 [^注]: 如果想要点击链接之后另外起一个网页展示链接内容，则可以配置a标签的target属性，当target=“_blank”时效果为在新窗口中跳转，会保留下原网页。当target=“_self”时，也是跳转标签的默认值，会直接在原网页上加载链接内容，覆盖掉原网页。
 
@@ -519,7 +499,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 **执行效果**：
 
-<img src="https://img1.imgtp.com/2022/10/17/acY06c5p.png" alt="1666012746277.png" title="1666012746277.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140316.png"/>
 
 ### 5.2 有序列表
 
@@ -558,7 +538,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 **执行效果**：
 
-<img src="https://img1.imgtp.com/2022/10/17/v5OfrQNT.png" alt="1666013443938.png" title="1666013443938.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140352.png"/>
 
 ### 5.3 自定义列表
 
@@ -598,7 +578,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 **效果展示**：
 
-![image-20221017214106584](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20221017214106584.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140444.png"/>
 
 ## 6、表格标签
 
@@ -712,7 +692,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/InwY8G6I.png" alt="1666016573056.png" title="1666016573056.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140653.png"/>
 
 ### 表格合并
 
@@ -781,7 +761,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/G7GsERzC.png" alt="1666018876020.png" title="1666018876020.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140608.png"/>
 
 ## 7、表单标签
 
@@ -830,7 +810,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/Y1Rt2JaB.png" alt="1666021083998.png" title="1666021083998.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140831.png"/>
 
 #### 7.1.1 文本框 text
 
@@ -864,7 +844,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/4MgZOj17.png" alt="1666021512423.png" title="1666021512423.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140915.png"/>
 
 #### 7.1.2 单选框 radio
 
@@ -898,7 +878,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 
 执行效果：
 
-<img src="https://img1.imgtp.com/2022/10/17/HkOKtdWP.png" alt="1666022011580.png" title="1666022011580.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_141003.png"/>
 
 #### 7.1.3 文件上传 file
 
@@ -1116,7 +1096,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b885d12938.png" alt="1666943065595.png" title="1666943065595.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_172126.png"/>
 
 ## 8、语义化标签
 
@@ -1147,9 +1127,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b8ef889efa.png" alt="1666944755889.png" title="1666944755889.png" />
-
-
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_170954.png"/>
 
 ### 含语义布局标签
 
@@ -1190,5 +1168,5 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_170358.png"/>
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_172430.png"/>
 

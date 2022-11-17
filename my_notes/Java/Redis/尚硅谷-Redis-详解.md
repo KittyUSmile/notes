@@ -30,8 +30,8 @@
 ## NoSQL扩展
 
 1、NoSQL数据库不依赖业务之间的关系而进行分表存储，而是通过KV键值对的方式进行存储，因此极大地增加了其扩展能力。 
-2、NoSQL有自己一套规范，不遵循SQL标准，同时不支持ACID(但支持事务)，且性能远超关系型数据库。 
-3、NoSQL适用于常见高并发和海量数据读写的情况。
+2、NoSQL有自己一套规范，不遵循SQL标准，不支持ACID(但支持事务)，性能远超关系型数据库。 
+3、NoSQL适用于常见高并发和海量数据的读写。
 4、NoSQL不适用于需要事务支持或需要复杂结构关系支持的情况。
 5、常用的NoSQL数据库有Memcache(较为古早，不支持持久化，KV存储，类型单一，执行为多线程+锁)、Redis(支持持久化，存储数据类型丰富，执行为单线程+多路IO复用)、mongoDB(文档型数据库，数据可存硬盘，KV存储，查询功能丰富，支持二进制数据及大型对象存储)
 6、NoSQL的使用打破了传统关系型数据库以业务逻辑为依据的存储模式，而针对不同数据结构类型改为以性能为最优先的存储方式。
@@ -40,7 +40,7 @@
 
 # Redis安装
 
-```
+```stylus
 安装版本(视频版本): redis-6.2.1.tar.gz
     
 安装要求: Linux环境下的Redis版本(一般不考虑Windows环境下的版本)。
@@ -49,10 +49,10 @@
 1、先下载redis-6.2.1.tar.gz
 2、通过xftp传送至Linux的/opt目录下，再通过xshell连接上Linux，进入/opt目录。进行解压前，需要在Linux环境中安装好C语言的编译环境(因为Redis是C语言编写的)。
     2.1、安装命令(默认安装在/usr/local/bin目录下):
-		yum install centos-release-scl scl-utils-build
+		 yum install centos-release-scl scl-utils-build
          yum install -y devtoolset-8-toolchain
          scl enable devtoolset-8 bash
-    2.2、或者只安装gcc环境(选一个即可):
+    2.2、或者只安装gcc环境(2.1/2.2选一个即可):
 		yum install gcc
 3、解压压缩包。解压命令:
 		tar -zxvf redis-6.2.1.tar.gz
@@ -64,20 +64,20 @@
    4.3、执行安装命令(默认安装目录为/usr/local/bin):
 		make install
    4.4、安装目录下共有六个安装文件，其作用分别是:
-		redis-benchmark: 性能测试工具，可以测试自己的服务器性能如何。
+		 redis-benchmark: 性能测试工具，可以测试自己的服务器性能如何。
          redis-check-aof: 修复有问题的AOF文件。
          redis-check-dump: 修复有问题的dump.rdb文件。
          redis-sentinel: Redis集群使用。
          redis-server: Redis服务器启动命令。
          redis-cli: 客户端，操作入口。
 5、启动命令:
-	前台启动(不推荐，不能进行其它操作，窗口关闭即停止，ctrl + c停止服务): redis-server
+	 前台启动(不推荐，不能进行其它操作，窗口关闭即停止，ctrl + c停止服务): redis-server
      后台启动(推荐，窗口关闭仍运行，redis-cli shutdown停止服务): 
-		5.1、首先进入/opt/redis-6.2.1.tar.gz目录中，将redis.conf文件复制一份(保留源文件，目的地址哪都行): cp redis.conf /etc/redis.conf。
+		 5.1、首先进入/opt/redis-6.2.1.tar.gz目录中，将redis.conf文件复制一份(保留源文件，复制目的目录哪都行): cp redis.conf /etc/redis.conf。
          5.2、修改etc下的配置文件vi /ect/redis.conf，将128行处的daemonize no修改为yes(允许后台启动)
          5.3、进入redis默认安装目录: cd /usr/local/bin，执行后台启动命令(后面跟的是复制修改后的redis.conf文件目录):redis-server /etc/redis.conf
          5.4、启动成功后，查看redis状态: ps -ef | grep redis
-		5.5、通过客户端连接上redis命令: redis-cli
+		 5.5、通过客户端连接上redis命令: redis-cli
 ```
 
 
@@ -86,12 +86,12 @@
 
 1、Redis默认16个库，类似数组下标从0开始，初始默认使用0号库。
 2、使用select <dbid>进行数据库切换。如select 8。
-3、dbsize命令查看但概念数据库的key数量，flushdb清空当前库，flushall清空所有库。
+3、dbsize命令查看数据库的key数量，flushdb清空当前库，flushall清空所有库。
 4、Redis使用的是单线程 + 多路IO复用。多路IO复用的意思是线程提出操作申请，然后去做自己的事情，等到被通知运行操作时，再回来进行操作。
 
 ## 配置文件介绍
 
-```
+```stylus
 启动前将redis.conf复制到/etc下，通过vi/etc/redis.conf进行查看。
 
 开头第一部分: ### Units单位 ###
@@ -132,7 +132,7 @@
 
 ## Redis发布和订阅
 
-```
+```stylus
 Redis的发布订阅(pub/sub)是一种消息通信模式: 发送者(pub)发送消息，订阅者(sub)接收消息。Redis的客户端可以订阅任意数量的频道(channel)接收消息，也可以向任意数量的频道(channel)发送消息。当客户端向某频道发送消息后，订阅了这个频道的客户端就能接收到消息。
 
 通过Redis发布和订阅频道消息:
@@ -152,7 +152,7 @@ Redis的发布订阅(pub/sub)是一种消息通信模式: 发送者(pub)发送�
 
 ## Redis键(key)
 
-```
+```stylus
 关于键值的常用命令:
 1、keys *
     查看当前库的所有key。如(查询一号库所有键): keys *1
@@ -184,7 +184,7 @@ Redis的发布订阅(pub/sub)是一种消息通信模式: 发送者(pub)发送�
 
 > String是Redis最基本的类型，一个key对应一个value。String类型是二进制安全的，即只要一个数据类型可以使用字符串表示，就都可以存储到Redis中。一个Redis的字符串value最多可以存储512M数据。
 
-```
+```stylus
 常用命令:
 1、set <key> <value>
 	向当前库中添加key对应的value，若key已存在，则直接覆盖。如: set a1 1
@@ -222,7 +222,7 @@ Redis的发布订阅(pub/sub)是一种消息通信模式: 发送者(pub)发送�
 
 ### 底层数据结构
 
-```
+```stylus
 String的数据结构为简单动态字符串(Simple Dynamic String，缩写为SDS)，是可以修改的字符串，其内部结构实现上类似于Java的ArrayList，采用了预分配冗余空间的机制减少内存的频繁分配。即实际使用的内存len小于实际分配的内存capacity，当字符串长度小于1M时，扩容是加倍capacity，当字符串超过1M时，扩容只会每次多扩1M空间，注意String类型最大长度为512M。
 ```
 
@@ -230,7 +230,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String，缩写为S
 
 > 单键多值。即一个key对应一个字符串列表，列表有序，并允许添加元素到列表头或列表尾。列表底层由双向链表构成，因此操作两端数据时效率较高，查询或操作中间数据时效率较低。
 
-```
+```stylus
 常用方法:
 1、lpush / rpush <key> <value1> <value2> <value3>
 	从左/右边向key对应的列表插入<value1>,<value2>,<value3>。如(向a列表中从左依次插入1,2,3): lpush a 1 2 3。最终list为3,2,1。
@@ -254,7 +254,7 @@ String的数据结构为简单动态字符串(Simple Dynamic String，缩写为S
 
 ### 底层数据结构
 
-```
+```stylus
 1、List底层的数据结构为快速链表qucikList，快速链表其实由压缩列表(zipList)构成，压缩列表即一块连续的内存空间，当列表元素较少时就采用压缩列表存储，其中的元素挨个存储，因此也具有双向链表特征。
 2、当列表元素较多时，就再开一片压缩列表空间用来存储列表元素，并与之前的压缩列表互相指向。
 3、Redis采用这种存储方法的原因为: 若每个列表元素都附加两个指针，那么内存开销会很大，因此使用zipList进行互相指向减少内存消耗，zipList中的元素由于连续，也拥有双向链表的特性。
@@ -262,9 +262,9 @@ String的数据结构为简单动态字符串(Simple Dynamic String，缩写为S
 
 ## 集合(Set)
 
-> Set提供的功能与List类似，也是[key-列表]结构，不同点在于Set可以自动去重且无序的。Set是String类型的无序集合，其底层实际上是一个value为null的hash表，因此添加，删除，修改的时间复杂度都为O(1)。
+> Set提供的功能与List类似，也是[key-列表]结构，不同点在于Set可以自动去重且是无序的。Set是String类型的无序集合，其底层实际上是一个value为null的hash表，因此添加，删除，修改的时间复杂度都为O(1)。
 
-```
+```stylus
 常用方法:
 1、sadd <key> <value1> <value2>...
 	将一个或多个member元素加入到key对应的Set中，已经存在的member元素会被忽略。
@@ -292,13 +292,13 @@ String的数据结构为简单动态字符串(Simple Dynamic String，缩写为S
 
 ### 底层数据结构
 
-```
+```stylus
 Set底层数据结构其实是hash结构，所有的value都指向同一个内部值。
 ```
 
 ## 哈希(Hash)
 
-```
+```stylus
 介绍:
 1、哈希也是一个键值对集合，每个键值对都是一个String类型key对应一个或多个field和value的键值对，hash适合存储对象，其类似于Java中的Map<String, Object>。
 	即:
@@ -330,7 +330,7 @@ Set底层数据结构其实是hash结构，所有的value都指向同一个内�
 
 ### 底层数据结构
 
-```
+```stylus
 Hash类型对应的数据结构为两种: zipList(压缩列表)，hashtable(哈希表)。当field-value长度较短且个数较少时，使用zipList，否则使用hashtable。
 ```
 
@@ -338,7 +338,7 @@ Hash类型对应的数据结构为两种: zipList(压缩列表)，hashtable(哈�
 
 > ZSet和Set非常相似，都是一个没有重复元素的字符串集合。不同之处为ZSet中每个成员都关联了一个评分(score)，这个评分(score)被用来按照从最低分到最高分的方式排序ZSet中的成员，集合中的成员是唯一的，评分可以重复。因为ZSet中的元素是有序的，因此可以很快通过评分(score)或者次序(position)来获取一个范围的元素。访问ZSet的中间元素也是非常快的，因此能够使用ZSet作为一个没有重复成员的智能列表。
 
-```
+```stylus
 常用方法:
 1、zadd <key> <score1> <value1> <score2> <value2>...
 	将一个或多个member元素及其score值加入到有序集合key中。
@@ -360,7 +360,7 @@ Hash类型对应的数据结构为两种: zipList(压缩列表)，hashtable(哈�
 
 ### 底层数据结构
 
-```
+```stylus
 ZSet是Redis提供的一个非常特别的数据结构，一方面它等价于Java中的数据结构Map<String, Double>，可以为每一个元素value赋予一个权重score，另一方面它又类似于TreeSet，其内部的元素会按照权重score进行排序，可以得到每个元素的名次，还可以通过score的范围来获取元素的列表。
 
 详解:
@@ -377,7 +377,7 @@ ZSet是Redis提供的一个非常特别的数据结构，一方面它等价于Ja
 
 > Bitmaps并不是一种数据类型，其本质上还是字符串。Redis提供这种类型，允许其对字符串的位直接进行操作。Bitmaps单独提供了一套命令，因此在Redis中使用Bitmaps和使用字符串的方法不太一样。可以把Bitmaps想象成一个以位为单位的数组，数组中的每个单元只能存储0和1，数组的下标在Bitmaps中被称为偏移量。
 
-```
+```stylus
 常用方法:
 1、setbit <key> <offset> <value>
 	设置Bitmaps中某个偏移量(下标)的值。如(将user:20220727中偏移量为1的值设置为1): setbit user:20220727 1 1。
@@ -400,7 +400,7 @@ ZSet是Redis提供的一个非常特别的数据结构，一方面它等价于Ja
 
 > HyperLogLog可以看作是Redis提供的用来解决Set存储空间大的问题，HyperLogLog可以看成是一种Set，但是其耗空间极少，它存储数据通过基数统计，基数统计即获取去重之后的数据。其底层采用HyperLogLog算法，在Redis中每个键都占用12K内存，但value理论上能够存储2^64个值，其存在约0.81%的标准错误。
 
-```
+```stylus
 常用方法:
 1、pfadd <key> <element> [element..]
 	添加指定元素到key对应的HyperLogLog中。如: pfadd 20220727 "192.132.1.45"
@@ -417,7 +417,7 @@ ZSet是Redis提供的一个非常特别的数据结构，一方面它等价于Ja
 
 > Redis在3.2.0起提供的一种用以存储地理位置的数据类型。一般应用于微信定位、附近的人或者打车距离计算等。其底层采用的是geohash，Redis的数据类型Geospatial能通过上传的经纬度计算出geohash并存储，即长度为12个字符的字符串，不同城市的经纬度算出的geohash前缀约接近，则相距越近。
 
-```
+```stylus
 常用方法:
 1、geoadd <key> <longitude> <latitude> <member> [<longitude> <latitude> <member>...]
 	向key中加入经度为<longitude>，纬度为<latitide>的<member>成员。如: geoadd China:city 121.47 21.23 shanghai。
@@ -533,7 +533,7 @@ public class RedisConfig extends CachingConfigurationSelector {
 
 > Redis中的事务是一个单独的隔离操作。事务中的所有命令都会被序列化，然后串行化执行。且事务在执行的过程中，不会被其它客户端发送来的命令请求所打断。Redis事务的主要作用就是串联多个命令防止别的命令插队。
 
-```
+```stylus
 Redis中通过三个命令: 开启事务(Multi)，执行事务(Exec)，放弃事务(discard)来管理事务。当开启事务时，Redis指令会顺序进入命令队列中，等到执行事务时，再依次进行执行。若中途放弃事务，则所有指令不执行。
 	
 	使用如:
@@ -611,7 +611,7 @@ ab -helo
 
 3、使用：
 
-```
+```stylus
 ab [options] [http[s]://]hostname[:port]/path
 
 [options]操作举例(同时进行):
@@ -625,7 +625,7 @@ ab [options] [http[s]://]hostname[:port]/path
 
 > 并发情况下程序可能会出现超卖问题。
 
-```
+```java
 超卖问题解决:
 1、对将执行的操作加上事务。
 2、加上事务之前watch key。
