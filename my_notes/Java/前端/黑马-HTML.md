@@ -452,7 +452,7 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 <img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140234.png"/>
 
-[^注]: 如果想要点击链接之后另外起一个网页展示链接内容，则可以配置a标签的target属性，当target=“_blank”时效果为在新窗口中跳转，会保留下原网页。当target=“_self”时，也是跳转标签的默认值，会直接在原网页上加载链接内容，覆盖掉原网页。
+[^注]: 1、如果想要点击链接之后另外起一个网页展示链接内容，则可以配置a标签的target属性，当target=“_blank”时效果为在新窗口中跳转，会保留下原网页。当target=“_self”时，也是跳转标签的默认值，会直接在原网页上加载链接内容，覆盖掉原网页。    
 
 
 
@@ -501,6 +501,10 @@ vscode提供了快捷注释按键：**ctrl + /**
 
 <img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140316.png"/>
 
+[^注]: 如果要去除列表标签的默认样式，可以采用ul属性中的 list-style: none 去掉
+
+
+
 ### 5.2 有序列表
 
 > 在网页中表示一组有顺序之分的列表数据，特点是列表的每一项前默认都会显示序号标识。
@@ -539,6 +543,8 @@ vscode提供了快捷注释按键：**ctrl + /**
 **执行效果**：
 
 <img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140352.png"/>
+
+
 
 ### 5.3 自定义列表
 
@@ -579,6 +585,8 @@ vscode提供了快捷注释按键：**ctrl + /**
 **效果展示**：
 
 <img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/31/2022-10-31_140444.png"/>
+
+
 
 ## 6、表格标签
 
