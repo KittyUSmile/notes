@@ -1,4 +1,4 @@
-# 一、基础认知
+# 	一、基础认知
 
 > HTML可以看成是网页的骨架，它决定了网页的结构，而CSS可以看作是网页的表现，决定这副骨架上的肉体是什么样子，JS则决定骨架和肉体组成的机体具有什么样的行为。
 
@@ -281,6 +281,8 @@ HTML文件：
 ### 1、标签选择器
 
 > 通过选中某类标签来赋予样式，比如选中<p>标签，就能给页面中所有<p>标签中的内容赋予相同样式。
+
+**用法：p{}**
 
 ```html
 <!DOCTYPE html>
@@ -597,6 +599,8 @@ HTML文件：
 
 > 即选择满足多个条件的选择器，比如找到 p 标签且 class=“xx” 的 p 标签。交集的写法就是在各个条件之间连着写即可。
 
+**语法：p.box{}**
+
 注意点：
 
 1. 交集选择器中的选择器之间是紧挨着的，没有任何东西分隔
@@ -634,7 +638,7 @@ HTML文件：
 
 > 鼠标悬停在某个元素上时元素展现的状态。可以用来设置鼠标移上标签时的变化样式。
 
-语法：**选择器:hover{style样式}**
+**语法：选择器:hover{style样式}**
 
 注意：
 
@@ -2019,10 +2023,6 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 # 七、浮动
 
-
-
-
-
 ## 1、伪元素
 
 > 伪元素一般是用于页面中的非主体内容部分，可替换部分，并且伪元素是由CSS模拟出来的标签效果。伪元素一共有两个::before和::after。
@@ -2733,7 +2733,9 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 ## 3、圆角边框
 
-> 把边框变为圆角。主要用于提升用户体验，属性是 border-raduis，常见取值类型有 数字 + px、百分比，其原理是看圆角占圆的百分比。
+> 把边框变为圆角。主要用于提升用户体验，属性是 border-radius，常见取值类型有 数字 + px、百分比，其原理是看圆角占圆的百分比。
+
+**属性：border-radius: 15%**
 
 **代码**
 
@@ -2908,6 +2910,217 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 
 
+## 7、元素阴影
+
+> 元素阴影分为文字阴影和盒子阴影，作为装饰更加好看，提升用户体验。盒子阴影的属性名为 box-shadow。
+
+**盒子阴影属性：box-shadow: 3px 3px 15px 3px grey;**
+
+**盒子阴影属性取值**
+
+|   参数   |               作用               |
+| :------: | :------------------------------: |
+| h-shadow | 必写，阴影水平偏移量，允许为负值 |
+| v-shadow |   必写，垂直偏移量，允许为负值   |
+|   blur   |           可选，模糊度           |
+|  spread  |        可选，阴影扩大尺寸        |
+|  color   |          可选，阴影颜色          |
+|  inset   |     可选，将阴影改为内部阴影     |
+
+**代码**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 150px;
+            height: 150px;
+            background-color: rgb(255, 224, 255);
+            border-radius: 15%;
+            /* 连写参数为 水平 垂直 模糊度 阴影尺寸 阴影颜色 */
+            box-shadow: 3px 3px 15px 3px grey;
+        }
+        div:hover{
+            box-shadow: 3px 3px 10px 3px grey;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_21-12-23.png">
+
+## 8、精灵图
+
+> CSS中精灵图其实就是一张具有多个图标的长图片，使用时作为背景图，通过调整图片坐标露出需要的部分即可，这种做法其实是为了减小服务器请求压力。
+
+使用步骤
+
+1. 创建一个非行内盒子，设置好宽高。
+2. 将精灵图作为盒子背景图片。
+3. 调整背景图坐标露出需要的部分。
+
+**代码**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 20px;
+            height: 20px;
+            background-color: rgb(255, 213, 245);
+            background-image: url("./1.png");
+            background-position: 4px -23px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_20-41-09.png">
+
+## 9、背景图片大小
+
+> 等比方法或缩小背景图片大小。属性名是 background-size。
+
+**属性名：background-size: 20px**
+
+|   取值    |                      场景                      |
+| :-------: | :--------------------------------------------: |
+| 数字 + px |       扩大或缩小多少像素。简单方便，常用       |
+|  百分比   |         按盒子最短边等比扩大或缩小图片         |
+|  contain  | 将图片等比放大铺满盒子，图片完整，有可能留白。 |
+|   cover   |    图片等比放大，将盒子铺满，图片可能不完整    |
+
+**代码**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 400px;
+            background-color: rgb(255, 215, 250);
+            background-image: url("./2.jpg");
+            /* 像素放大 */
+            background-size: 300px;
+            /* 等比方法，以盒子大小为比例 */
+            /* background-size: 100%; */
+            /* 等比放大直到一边到达盒子边框 */
+            /* background-size: contain; */
+            /* 等比放大，完全充满盒子 */
+            /* background-size: cover; */
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_20-57-06.png">
+
+[^注]: 复合写法就是 background: color image repeat position/size; 需要注意覆盖问题，单独样式写在连写下面。
+
+
+
+## 10、过渡
+
+> 让元素的样式顺滑的变化，长配合hover一起使用，增强用户的交互体验。
+
+**属性名：transition: all 1s** 
+
+常见取值
+
+|    参数    |                          取值                           |
+| :--------: | :-----------------------------------------------------: |
+| 过渡的属性 | all：所有能过渡的属性都过渡；某个具体属性：只过渡该属性 |
+| 过渡的时长 |                      数字 + s (秒)                      |
+
+**注意点**
+
+1. 只有默认状态和 hover 状态样式不一样的才有过渡效果
+2. transition 属性只给需要过渡的元素本身加
+3. transition 如果给默认状态设置，则鼠标移入移出都有过渡效果；如果给 hover 设置，则只有鼠标移入时才有过渡效果，移出时没有过渡效果。
+
+**代码**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 150px;
+            background-color: rgb(255, 216, 236);
+            border-radius: 75px;
+            box-shadow: 3px 3px 15px 3px grey;
+            background-image: url("./3.gif");
+            background-size: contain;
+            transition: all 1s;
+        }
+        div:hover{
+            width: 600px;
+            height: 150px;
+            background-color: rgb(178, 247, 255);
+            border-radius: 75px;
+            box-shadow: 3px 3px 10px 3px grey;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_21-33-01.png">
+
+## 11、网页图标
+
+> 网页框的图标显示。在head中设置。
+
+**代码**
+
+```html
+<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_22-00-06.png">
+
+
+
 # 十、扩展
 
 > 扩展一些前端开发技巧
@@ -2930,3 +3143,22 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 > 项目开发必备，去除盒子变化导致其中浮动元素带来的影响。一般通过伪元素去除。
 
+
+
+## 3、SEO
+
+> 即让自己的网站被搜索引擎搜索排名更排前。
+
+**提升方法**
+
+1. 竞价排名
+2. 将网页制作成html后缀
+3. 标签语义化（在合适地方使用合适标签）
+
+**SEO三大标签**（百度搜索依据）
+
+1. title：网页标题标签
+2. description：网页描述标签
+3. ketwords：网页关键词标签
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_21-48-25.png">
