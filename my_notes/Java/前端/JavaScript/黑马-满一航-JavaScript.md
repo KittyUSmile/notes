@@ -351,9 +351,7 @@ for(let i = 0; i < arr.length; i++){
 }
 ```
 
-#### API
-
-##### push、shift、splice
+#### push、shift、splice
 
 ```javascript
 let arr = [1,2,3];
@@ -368,7 +366,7 @@ arr.shift();	// 结果: arr[2,3,4]
 arr.splice(1,1);	// 结果: arr[2,4]
 ```
 
-##### join
+#### join
 
 ```javascript
 let arr = ['a', 'b', 'c'];
@@ -379,7 +377,7 @@ arr.join('-')	// 结果: 'a-b-c'
 arr.join('_')	// 结果: 'a_b_c'
 ```
 
-##### map、filter、foreach
+#### map、filter、foreach
 
 > 这三个函数在执行时都不会对原有数组产生变化，生成的都是新数组。
 

@@ -1,12 +1,12 @@
 入门篇
 
-## 1、MQ基本概念
+# 1、MQ基本概念
 
-### 1.1 概述
+## 1、概述
 
 MQ全称Message Queue（消息队列），是在消息的传输过程中保存消息的容器，多用于分布式系统之间进行通信。
 
-总结：
+即：
 
 - MQ，消息列表，存储消息的中间件
 - 分布式系统通信的两种方式：**直接远程调用**和**借助第三方**完成间接通信
@@ -14,9 +14,9 @@ MQ全称Message Queue（消息队列），是在消息的传输过程中保存�
 
 
 
-### 1.2 MQ的优势和劣势
+## 2、MQ的优势和劣势
 
-#### 优势
+### 优势
 
 - **应用解耦**：使用MQ使得**应用间解耦**，**提升容错性**和**可维护性**。举个例子，如订单系统需要调用库存系统、支付系统、物流系统完成服务，如果通过远程调用，二者就耦合在一起了，如果使用MQ，订单系统将消息发送到MQ，其它系统去MQ中取出消息进行消费即可，大大降低了模块之间的耦合。且如果需要加入新系统，原订单系统也无需修改代码，只需要让新模块同样去MQ中取出订单系统的消息消费即可。
 
@@ -26,7 +26,7 @@ MQ全称Message Queue（消息队列），是在消息的传输过程中保存�
 
   
 
-#### 劣势
+### 劣势
 
 - **系统可用性降低**：传统方式使用远程调用只要考虑两个系统的可用性，如果使用MQ，则还需要考虑MQ的工作状态。即系统引入的外部依赖越多，系统稳定性越差。一旦MQ宕机，就会对业务造成严重影响，所以还需要考虑MQ的高可用。
 - **系统复杂度提高**：使用了MQ，还需要考虑很多可能发生的问题，如如何保证消息没有被重复消费，如何处理消息丢失情况，如何保证消息传递的顺序性等等问题，对这些问题的处理将大大增加系统的复杂度。
@@ -34,7 +34,7 @@ MQ全称Message Queue（消息队列），是在消息的传输过程中保存�
 
 
 
-#### 总结
+### 总结
 
 使用MQ既有优势也有劣势，使用MQ最好满足以下条件再考虑使用：
 
@@ -44,7 +44,7 @@ MQ全称Message Queue（消息队列），是在消息的传输过程中保存�
 
 
 
-### 1.3 常见的MQ产品
+## 3、常见的MQ产品
 
 目前业界有很多的MQ产品，例如RabbitMQ、RocketMQ、ActiveMQ、Kafka、ZeroMQ、MetaMQ等，当然，也有直接使用Redis充当消息队列的案例，而这些消息队列产品，**各有侧重**，在实际选型时，需要结合自身需求及MQ产品特征，**综合考虑**。
 
@@ -60,15 +60,15 @@ MQ全称Message Queue（消息队列），是在消息的传输过程中保存�
 
 
 
-### 1.4 RabbitMQ简介
+## 4、RabbitMQ简介
 
-介绍RabbitMQ前，先介绍下**AMQP协议**，即Advanced Message Queuing Protocol（高级消息队列协议）是一个网络协议，是**应用层协议**的一个**开放标准**，为面向消息的中间件设计规范。基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品。不同的开发语言等条件的限制，该协议规范于2006年发布。
+介绍RabbitMQ前，先介绍下**AMQP协议**，即Advanced Message Queuing Protocol（高级消息队列协议）是一个网络协议，是**应用层协议**的一个**开放标准**，为面向消息的中间件设计规范。基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品、不同的开发语言等条件的限制，该协议规范于2006年发布。
 
-![image-20220829112801439](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20220829112801439.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/8/image-20220829112801439.png">
 
 在2007年，Rabbit公司基于AMQP标准开发的RabbitMQ1.0发布。RabbitMQ采用Erlang语言开发。架构如下：
 
-![img](https://img2020.cnblogs.com/blog/1552936/202010/1552936-20201024103921637-693350551.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/8/1552936-20201024103921637-693350551.png">
 
 其中的相关概念为：
 
@@ -86,13 +86,15 @@ RabbitMQ提供了六种工作模式：**简单模式**、**work queues**、**Pub
 
 
 
-## 2、RabbitMQ的安装和配置
+# 2、RabbitMQ的安装和配置
 
 
 
-## 3、RabbitMQ简单模式快速入门
 
-使用 Java 代码测试一下RabbitMQ的**简单模式**。首先在项目中引入RabbitMQ的客户端依赖（操作RabbitMQ），而RabbitMQ的服务要启动起来。
+
+# 3、RabbitMQ简单模式入门
+
+使用 Java 代码测试一下RabbitMQ的**简单模式**。首先在项目中引入RabbitMQ的客户端依赖（操作RabbitMQ），并且RabbitMQ的服务要启动起来。
 
 ```xml
 <dependency>
@@ -104,7 +106,7 @@ RabbitMQ提供了六种工作模式：**简单模式**、**work queues**、**Pub
 
 然后根据MQ架构来编写**生产者**相关代码：
 
-### 1、生产者代码
+## 1、生产者代码
 
 ```java
 //1、创建连接工厂
@@ -146,7 +148,7 @@ channel.close();
 connection.close();
 ```
 
-### 2、消费者代码
+## 2、消费者代码
 
 ```java
 //1、创建连接工厂
@@ -194,21 +196,21 @@ channel.basicConsume("hello_world", true, consumer);
 
 
 
-## 4、RabbitMQ的工作模式
+# 4、RabbitMQ的工作模式
 
 上面已经对简单模式进行了测试。不难看出，RabbitMQ的各种工作模式其实就是消息的**路由策略**和**分发方式**不一样。
 
-### 4.1、Work queues 工作队列模式
+### 1、Work queues 工作队列模式
 
-![RabbitMQ的6种消息类型实现_GoslingJ的博客-CSDN博客_rabbitmq 消息类型](https://img-blog.csdnimg.cn/20200310001253725.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/8/20200310001253725.png">
 
 Work queues工作队列模式相较于简单模式，只是在**多了一个或多个消费者**，这些消费者**竞争**同一个队列中的消息。对于**任务较多**情况或**任务过重**的情况下使用工作队列可以**提高任务处理的速度**。
 
 
 
-### 4.2、Pub / Sub 订阅模式
+### 2、Pub / Sub 订阅模式
 
-![Spring Boot消息队列应用实践- JeffWong - 博客园](https://images2018.cnblogs.com/blog/32361/201804/32361-20180430112647832-1604774090.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/8/32361-20180430112647832-1604774090.png">
 
 Pub / Sub订阅模型中，多了一个**Exchange**角色（其实其它模式也有，只不过使用的是默认交换机），在使用时与简单模式和工作队列模式略有区别。
 
@@ -223,9 +225,9 @@ Pub / Sub订阅模型中，多了一个**Exchange**角色（其实其它模式�
   - Direct：**定向**，把消息交给符合指定routing key的队列
   - Topic：**通配符**，把消息交给符合routing pattern（路由模式）的队列
 
-Exchange（交换机）只负责**转发消息**，并不具备存储消息的能力，因此如果没有任何队列与Exchange绑定，或者没有符合路由规则的队列，那么消息会**丢失**。
+Exchange（交换机）只负责**转发消息**，并不具备存储消息的能力，因此如果没有任何队列与Exchange绑定，或者没有符合路由规则的队列，那么消息会被**丢失**。
 
-#### 4.2.1、生产者代码（Fanout模式）
+#### 1、生产者代码（Fanout模式）
 
 ```java
 //1、创建连接工厂
@@ -294,7 +296,7 @@ channel.close();
 connection.close();
 ```
 
-#### 4.2.2、消费者代码
+#### 2、消费者代码
 
 多个消费者的话监听不同队列即可。
 
@@ -352,11 +354,11 @@ channel.basicConsume("test_fanout_queue2", true, consumer);
 //释放资源?不用
 ```
 
-### 4.3、Routing工作模式
+### 3、Routing工作模式
 
 Routing工作模式是基于**routingKey**来工作的，比如在发送消息到交换机前要指定routingKey，然后交换机通过routingKey发送到不同的队列中（队列在创建时可以指定自己的**routingKey**），让不同消费者消费。
 
-#### 4.3.1、direct交换机模式
+#### 1、direct交换机模式
 
 根据发送的 routingKey发送到指定routingKey的队列中。
 
@@ -436,7 +438,7 @@ connection.close();
 
 
 
-#### 4.3.2、Topic交换机模式
+#### 2、Topic交换机模式
 
 通过Topic通配符方式绑定队列，规则是队列1定义自己的routingKey为a.b.c。Topic交换机通过通配符绑定队列，即通过***，#**的方式进行匹配，*****表示不多不少只匹配**一个单词**，而**#**表示能够匹配**一个或多个单词**。
 
@@ -516,9 +518,9 @@ connection.close();
 
 
 
-## 5、Spring整合RabbitMQ
+# 5、Spring整合RabbitMQ
 
-步骤：
+### 大概步骤
 
 **生产者**：
 
@@ -554,9 +556,7 @@ rabbit.virtual-host=/
 
 
 
-## 6、SpringBoot整合RabbitMQ
-
-步骤：
+### 具体步骤
 
 **生产者**：
 
@@ -655,9 +655,9 @@ rabbit.virtual-host=/
 
 
 
-## 7、RabbitMQ高级特性
+# 6、RabbitMQ高级特性
 
-### 7.1、消息可靠性投递
+### 1、消息可靠性投递
 
 消息可靠性投递需要区分消息的经过路段，生产者到交换机，交换机是否宕机，消费者是否宕机，这些都影响消息投递的可靠性。
 
@@ -668,7 +668,7 @@ rabbit.virtual-host=/
 - 消费者消息确认
 - 消费失败重试机制
 
-#### 7.1.1、生产者确认机制
+#### 1、生产者确认机制
 
 RabbitMQ提供了**publisher confirm**机制来避免消息发送到MQ的过程中丢失。消息发送到MQ以后，会返回一个结果给发送者，表示消息是否成功到达交换机，或是否到达队列。
 
@@ -774,7 +774,7 @@ public class CommonConfig implements ApplicationContextAware {
 
 
 
-#### 7.1.2、消息持久化
+#### 2、消息持久化
 
 在生产者处保证了消息的可靠投递，那么在Broker处如果出现如**机器宕机**的情况，那么仍可能出现消息丢失问题，这时就需要考虑消息在Broker处的**持久化问题**。
 
@@ -810,11 +810,11 @@ Message message = MessageBuilder.withBody("hello, spring amqp".getBytes(Standard
     .build();
 ```
 
-其实在使用SpringAMQP且不手动设置情况下，默认底层方法对交换机、队列、消息都是**默认持久化**的。
+其实在使用SpringAMQP且不手动设置情况下，底层方法对交换机、队列、消息都是**默认持久化**的。
 
 
 
-#### 7.1.3、消费者消息确认
+#### 3、消费者消息确认
 
 在保证了消息投递可靠和消息持久化可靠后，压力就来到了消费者这边，如果消费者在消费消息时挂了，那么就无法保证消息的可靠性。
 
@@ -841,7 +841,7 @@ MQ支持的这三种确认模式中，当确认模式为**none**时，消费者�
 
 
 
-#### 7.1.4、消费失败重试机制
+#### 4、消费失败重试机制
 
 以上的auto消费者确认模式存在一些问题，当代码有问题时，每次拿到消息后进行执行都会抛出异常，然后每次都返回nack，然后又去队列中再次获取该消息，如此一直循环，将造成服务器较大压力。
 
@@ -907,7 +907,7 @@ spring:
    }
    ```
 
-2. 定义自己的失败重试策略，SpringBoot中默认配置的是RejectAndDontRequeueRecoverer，但是@ConditionOnMissingBean注解表明只要我们配置了MessageRecoverer该接口的实现类，就不自动配置。
+2. 定义自己的失败重试策略，SpringBoot中默认配置的是RejectAndDontRequeueRecoverer，但是@ConditionOnMissingBean注解表明只要我们配置了MessageRecoverer接口的实现类，就不自动配置。
 
    ```java
    //RepublishMessageRecoverer策略
@@ -919,7 +919,7 @@ spring:
 
 
 
-#### 7.1.5、总结
+#### 5、总结
 
 如何确保RabbitMQ消息投递的**可靠性**？
 
@@ -930,13 +930,13 @@ spring:
 
 
 
-### 7.3、消费端限流
+### 2、消费端限流
 
 
 
 
 
-### 7.4、TTL
+### 3、TTL
 
 即Time-To-Live，如果一个队列中的消息TTL结束仍未被消费，则会变成死信，TTL超时分为**两种超时**：
 
@@ -1003,7 +1003,7 @@ public void test4(){
 
 
 
-### 7.5、死信交换机
+### 4、死信交换机
 
 先谈谈死信，当一个队列中的消息满足下列情况之一时，就可以被称为死信（dead letter，也可以理解为即将被丢弃的消息）：
 
@@ -1015,7 +1015,7 @@ public void test4(){
 
 死信交换机的方式**类似于**RepublishMessageRecoverer策略，不过Republish是通过**消费端**将死信发送至交换机，而死信交换机是由**队列**来投递消息的，可以指定队列绑定的死信交换机。
 
-<img src="https://img-blog.csdnimg.cn/20210104181018452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0JiMTUwNzAwNDc3NDg=,size_16,color_FFFFFF,t_70#pic_center" alt="查看源图像" style="zoom: 50%;" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/8/20210104181018452.png">
 
 #### 总结
 
@@ -1030,7 +1030,7 @@ public void test4(){
 
 
 
-### 7.6、延迟队列
+### 5、延迟队列
 
 延迟队列的效果类似TTL + 死信队列，但没那么复杂。RabbitMQ官方使用了一个**插件**实现了延迟队列，首先需要在Linux中或Docker容器中进行安装：https://blog.csdn.net/DZP_dream/article/details/118391439
 
@@ -1091,7 +1091,7 @@ public Binding delayedBinding(){
 
 
 
-### 惰性队列
+### 6、惰性队列
 
 #### 消息堆积问题
 
@@ -1168,29 +1168,29 @@ public void listenLazyQueue(String msg){
 
 
 
-### 7.7、日志与监控
+### 7、日志与监控
 
 
 
-### 7.8、消息可靠性分析与追踪
+### 8、消息可靠性分析与追踪
 
 
 
-### 7.9、管理
+### 9、管理
 
 
 
-## 8、RabbitMQ应用问题
+# 7、RabbitMQ应用问题
 
-### 8.1、消息可靠性保障
-
-
-
-### 8.2、消息幂等性处理
+## 1、消息可靠性保障
 
 
 
-## 9、RabbitMQ集群搭建
+## 2、消息幂等性处理
+
+
+
+# 8、RabbitMQ集群搭建
 
 ### 集群分类
 
@@ -1245,7 +1245,7 @@ RabbitMQ的集群有两种模式：
 
 仲裁队列的添加十分简单：
 
-![image-20220902150821530](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20220902150821530.png)
+![image-20220902150821530](C:\Users\Lenovo\Desktop\note_pictures\image-20220902150821530.png)
 
 
 
