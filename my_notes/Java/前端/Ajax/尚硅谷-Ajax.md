@@ -634,7 +634,7 @@ app.listen(8000, () => {
 
 # 三、axios 发送 AJAX 请求
 
-> axios 是 AJAX 的工具库，方便我们操作。
+> axios 是 AJAX 的工具库，它专注于数据请求。
 
 **server.js**
 

@@ -73,11 +73,7 @@
 
 > 先通过一个小例子入门HTML
 
-<img src="https://img1.imgtp.com/2022/10/17/IEMBjYmn.png" alt="1665967976426.png" title="1665967976426.png" />
-
-<img src="https://img1.imgtp.com/2022/10/17/9mT2uDDo.png" alt="1665968075170.png" title="1665968075170.png" />
-
-![image-20221017085523026](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20221017085523026.png)
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/image-20221017085523026.png">
 
 ### 2.1 HTML页面骨架
 
@@ -909,7 +905,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b78a10f447.png" alt="1666939034515.png" title="1666939034515.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b78a10f447.png">
 
 #### 7.1.4 提交 submit/重置 reset
 
@@ -939,7 +935,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b7cb9a2985.png" alt="1666940085561.png" title="1666940085561.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b7cb9a2985.png">
 
 ### 7.2、button 按钮系列
 
@@ -964,7 +960,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b7eaae1539.png" alt="1666940583925.png" title="1666940583925.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b7eaae1539.png">
 
 ### 7.3、select 下拉菜单标签
 
@@ -1000,7 +996,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b80e20e489.png" alt="1666941150238.png" title="1666941150238.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b80e20e489.png">
 
 ### 7.4、textarea 文本域标签
 
@@ -1033,7 +1029,7 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b82a78c2c6.png" alt="1666941603383.png" title="1666941603383.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b82a78c2c6.png">
 
 [^注]: 如果要取消右下角拖拽放大功能，设置样式 resize:none; 即可
 
@@ -1064,13 +1060,13 @@ input标签重要的属性有 **type** 属性，其不同的值对应不同的�
 </head>
 <body>
     性别：
-    <input type="radio" name="gender" id="nan"><label for="nan">男</label></label></input>
+    <input type="radio" name="gender" id="nan"><label for="nan">男</label></input>
     <input type="radio" name="gender" id="nv"><label for="nv">女</label></input>
 </body>
 </html>
 ```
 
-<img src="https://img.00000.host/2022/10/28/635b865de94ac.png" alt="1666942554590.png" title="1666942554590.png" />
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/22/635b865de94ac.png">
 
 ##### 方法二
 
