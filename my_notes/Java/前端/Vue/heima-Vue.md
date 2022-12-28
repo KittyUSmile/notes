@@ -155,7 +155,7 @@ module.exports = {
 
 > webpack的一些默认约定或者配置。
 
-#### 默认打包约定
+#### 1、默认打包约定
 
 webpack默认找 src -> index.js 文件进行打包，然后放到 dist -> main.js 下。 如果需要修改这个默认规则，可以在 webpack 的配置文件 webpack.config.js 中进行配置，修改如下：
 
@@ -173,7 +173,7 @@ module.exports = {
 
 
 
-#### 自启动配置
+#### 2、自启动配置
 
 > 打包完毕后，自动启动服务器，访问指定端口。
 
@@ -192,7 +192,7 @@ module.exports = {
 
 
 
-#### 源码错误行数定位配置
+#### 3、源码错误行数定位配置
 
 > 因为浏览器运行的是我们打包过后的 js 文件，如果出现报错，那么提示的是打包后的 js 文件的行数，而不是我们开发时的 js 文件行数，这对我们进行错误定位不利，所以需要进行一下配置，让浏览器报错的行数和我们开发的 js 文件的行数一致。
 
@@ -218,7 +218,7 @@ module.exports = {
 
 
 
-#### 别名配置
+#### 4、别名配置
 
 > 用别名表示想要表示的部分，比如用 ’@‘ 符号表示根目录，需要在 webpack.config.js 中进行配置。
 
@@ -241,8 +241,6 @@ module.exports = {
 
 
 ## 3、webpack 插件
-
-
 
 #### 自动重新打包插件
 
@@ -750,7 +748,7 @@ vue中的指令按照不同的用途可以分为如下**六大类**：
 
 #### v-bind: / :
 
-> v-bind: 用于标签属性和 Vue 对象的 data 中的属性的单向绑定，:属性=”“ 的 “” 中可以写一些简单的 JS 表达式。
+> v-bind: 用于标签属性和 Vue 对象的 data 中的属性的单向绑定，:属性="" 的 "" 中可以写一些简单的 JS 表达式。
 >
 > 语法格式为：v-bind:标签属性=“绑定属性”。
 
@@ -806,7 +804,7 @@ v-bind 也支持 JavaScript 表达式的运算，例如：
 
 #### v-on:	/ @
 
-> v-on: 为标签绑定 Vue 对象的 methods 中的某个方法，语法格式为：v-on:事件名称=“事件处理函数名称”，v-on: 可以被简写为 @
+> v-on: 为标签绑定 Vue 对象的 methods 中的某个方法，语法格式为：v-on:事件名称=“事件处理函数名称”，v-on: 可以被简写为 @。其中 @事件名称="" 的 "" 中可以直接写简单的 JS 表达式，不只能调用方法。
 
 **使用示例**
 
@@ -1307,7 +1305,7 @@ v-model 指令有一些独特的**修饰符**，可以帮助 v-model 指令在�
 </script>
 ```
 
-<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/23/Snipaste_2022-12-23_10-04-47.png">
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/26/Snipaste_2022-12-26_09-46-03.png">
 
 
 
@@ -1487,6 +1485,23 @@ v-model 指令有一些独特的**修饰符**，可以帮助 v-model 指令在�
 
 > 计算属性是 Vue 提供的一种特殊属性，它定义在 vue 对象的 computed 节点下，可以用来做一些公共的操作，返回的值会作为 Vue 的属性。计算属性可以做到很好的代码复用。
 
+**计算属性的语法格式为（HTML格式）**：
+
+```vue
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {},
+        // Vue 提供的用来做公共操作的方法节点,里面的方法名字和返回值会被作为 Vue 的属性
+        computed:{
+            method1(){
+                return 'result';
+            }
+        }
+    })
+</script>
+```
+
 **使用案例**
 
 ```html
@@ -1591,7 +1606,7 @@ Vue.config.productionTip = false
 
 new Vue({
   // el: '#app',
-  // 调用render函数指定App.vue文件中的内容替换掉index.html中id为app的组件内容
+  // 调用render函数指定App.vue文件中的内容替换掉index.html中id为app的组件内容,render函数中渲染哪个vue文件哪个就叫根组件。
   render: h => h(App),
   // .$mount('#app) 作用和 el:'#app'一样, 都是指定关联的容器id
 }).$mount('#app')
@@ -1602,7 +1617,31 @@ new Vue({
 
 ## 8、组件
 
-> vue 中规定，组件的后缀名是 .vue。每个 .vue 组件都由三部分构成，分别是：**template**（组件的模板结构）、**script**（组件的 JavaScript 行为）、**style**（组件的样式）。
+> vue 中规定，组件的后缀名是 .vue。组件除 App.vue 外一般都放在 components 文件夹下。
+
+### 1、组件结构
+
+> 每个 .vue 组件都由三部分构成，分别是：**template**（组件的模板结构）、**script**（组件的 JavaScript 行为）、**style**（组件的样式）。
+
+**组件结构使用的格式为**
+
+```vue
+<template>
+  
+</template>
+
+<script>
+export default {
+	data(){
+        return{}
+    }
+}
+</script>
+
+<style>
+
+</style>
+```
 
 **使用举例**
 
@@ -1610,6 +1649,7 @@ new Vue({
 <template>
   <div class="box-style">
     <h3>用户名: {{ username }}</h3>
+    <button @click="changeName">修改用户名</button>
   </div>
 </template>
 
@@ -1624,13 +1664,521 @@ export default {
       username: "李四",
     };
   },
+  // 方法仍写在methods
+  methods:{
+    changeName(){
+      this.username = '张三'
+    }
+  },
+  // 侦听器
+  watch:{},
+  // 当前组件的计算属性
+  computed:{},
+  // vue2过滤器
+  filters:{},
 };
 </script>
 
-<style>
+<!-- 样式设置为less方式 -->
+<style lang="less">
 .box-style {
   background-color: rgb(222, 253, 255);
 }
 </style>
 ```
 
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/23/Snipaste_2022-12-23_16-30-13.png">
+
+### 2、组件引入
+
+> 各组件之间默认没有关系，但是可以通过引入组件的方式构造出父组件和子组件。组件引入有两种方式，分别可以获得私有组件和全局组件
+
+#### 私有组件
+
+> 引入后只能在本组件中使用，其它组件无法使用。
+
+**引入举例**
+
+```vue
+<template>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- 第三步: 以标签形式使用刚才注册的组件 -->
+    <HelloWorld></HelloWorld>
+  </div>
+</template>
+
+<script>
+// 引入组件第一步: 使用 import 语法导入需要的组件
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'App',
+  // vue 提供的节点，用来声明引入的组件。第二步: 使用 import 语法导入需要的组件
+  components: {
+    //导入格式为: '命名': 组件名  如果命名和组件名一致可以直接写组件名即可
+    HelloWorld
+  }
+}
+</script>
+
+<style lang="less">
+
+</style>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/23/Snipaste_2022-12-23_18-23-56.png">
+
+
+
+引入组件时手写可能会写错，可以安装一个 vscode 插件：**Path Autocomplete**
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/23/Snipaste_2022-12-23_18-26-32.png">
+
+安装后在 vscode 的 设置 -> 应用程序 -> 设置同步 中找到 settings.json，在最外层 {} 里面的头部加入以下配置：
+
+```json
+//导入文件时是否携带文件的扩展名
+"path-autocomplete.extensionOnImport": true,
+//配置 @ 的路径提示
+"path-autocomplete.pathMappings": {
+	"@":"${folder}/src"
+},
+```
+
+[^注]: 如果插件没有生效，首先重启，然后查看 vscode 工作区是否只有我们目前正在使用的那个项目，如果不是，重新只打开那个项目即可。
+
+
+
+#### 全局组件
+
+> 注册在**所有组件中都能使用的全局组件**，可以通过 vue 项目的 **main.js** 入口文件，通过 **Vue.component()** 方法，注册全局组件，示例代码如下：
+
+```js
+import Vue from 'vue'
+import App from './App.vue'
+// 导入组件
+import Count from '@/components/Count.vue'
+
+// 声明组件, 参数一为字符串格式,表示组件的注册名称, 参数二为需要被注册的组件
+Vue.component('MyCount', Count)
+
+Vue.config.productionTip = false
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+
+```
+
+
+
+### 3、生命周期
+
+> 生命周期（Lift Cycle）是指一个组件从 **创建 -> 运行 -> 销毁** 的整个阶段，在组件不同生命周期阶段，都可以指定生命周期函数，生命周期函数会在组件到达某个生命周期阶段时自动执行。
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/26/20200515103424403.png">
+
+**各周期函数使用举例**
+```js
+<script>
+export default {
+  data() {
+    return {};
+  },
+  
+  // Vue 创建阶段的四个函数
+  // 在刚初始化完vue对象后调用, 此时data或者其它数据或方法都还未加载, 该方法使用频率非常少
+  beforeCreate(){},
+  // data 和 methods 等都初始化完毕后调用, 可以用于数据的初始化, 但此时页面结构还未生成, 不能操作 DOM, 该方法使用频率最高
+  created(){},
+  // 基于数据和模板在内存中编译生成好模板后, 调用该方法, 此时模板还未渲染到浏览器中, 该方法使用频率非常少
+  beforeMount(){},
+  // 内存中编译生成的模板渲染到浏览器中后, 调用该方法, 此时浏览器中已包含当前组件的 DOM 结构了,可以开始操作DOM了, 该方法使用频率较高
+  mounted(){},
+
+
+  // Vue 运行阶段的两个函数
+  // 将要重新渲染模板结构中的数据时（如data中数据变化）, 调用该函数, 需要注意, 此时页面上的数据是旧的, 而data中的数据是新的, 该方法使用频率较低
+  beforeUpdate(){},
+  // 已经将新数据渲染到页面上后, 调用该函数, 此时无论是页面还是 data, 数据都是最新的, 该方法使用频率较高
+  updated(){},
+
+
+  // Vue 销毁阶段的两个函数 [使用均较少]
+  // 在组件即将被销毁前调用执行, 此时组件还未被销毁, 还处于正常工作状态
+  beforeDestroy(){},
+  // 组件已经被销毁后调用
+  destroyed(){},
+};
+</script>
+```
+
+### 4、数据共享
+> 谈组件之间的数据共享前先谈谈组件之间的关系，组件之间可以笼统地看作只有**父子关系**和**兄弟关系**。其中父向子数据共享可以通过**自定义属性**，即 props 进行数据共享，子向父共享数据可以使用**自定义事件**；兄弟组件之间的数据共享在 vue2 中使用的是 **EventBus 方案**
+
+#### 父子关系
+父向子数据共享举例 [ 通过 props ]：
+```js
+// 父组件
+<Son :msg="message" :user='userInfo'></Son>
+
+data(){
+	return{
+		message: 'hello vue',
+		userInfo: { name: 'zs', age: 20},
+	}
+}
+```
+
+```js
+// 子组件
+<template>
+	<div>
+		<p>父组件传递的 msg 值: {{ msg }}</p>
+		<p>父组件传递的 user 值: {{ user }}</p>
+	</div>
+</template>
+
+props:['msg', 'user']
+```
+
+子向父数据共享举例 [ 通过自定义事件 ]：
+```js
+// 子组件
+export default{
+	data(){
+		return { count: 0 }
+	},
+	methods:{
+		add(){
+			this.count += 1
+			// this.$emit('自定义事件名称', 事件传递的参数) 表示触发一个自定义事件
+			this.$emit('numchange', this.count)
+		}
+	}
+}
+```
+
+```js
+// 父组件
+// 自定义事件被触发时调用getNewCount方法
+<Son @numchange='getNewCount'></Son>
+
+export default{
+	data(){
+		return { countFromSon: 0 }
+	},
+	methods:{
+		getNewCount(val){
+			this.countFromSon = val
+		}
+	}
+}
+```
+
+#### 兄弟关系
+> 兄弟组件之间通过 EventBus 共享数据，EventBus其实就是一个普通的Vue对象，作为传输数据的桥梁。
+
+样例：
+
+eventBus.js：
+```js
+import Vue from 'vue'
+
+//向外共享 Vue 的实例对象
+export default new Vue()
+
+// eventBus.js
+```
+
+数据发送方：
+```js
+import bus from './eventBus.js'
+
+export default {
+	data(){
+		return {
+			msg: 'hello vue.js'
+		}
+	},
+	methods:{
+		sendMsg(){
+			// 触发自定义事件 share, 并将msg作为参数进行传递
+			bus.$emit('share', this.msg)
+		}
+	}
+}
+```
+
+数据接收方：
+```js
+import bus from './eventBus.js'
+
+export default {
+	data() {
+		return {
+			msgFromLeft: ''
+		}
+	},
+	created(){
+		// 为 bus 绑定好事件 share 及触发函数
+		bus.$on('share', val => {
+			this.msgFromLeft = val
+		})
+	}
+}
+```
+
+### 5、动态组件
+> 动态组件其实就是指让组件能够动态显示或者隐藏。
+
+Vue 内置提供了一个占位符组件\<component>，可以通过设置该组件的 is 属性，来绑定要渲染的组件，使用如：
+
+```js
+<template>
+  <div id="app">
+  
+    <component :is="comName"></component>
+  </div>
+</template>
+
+<script>
+import Left from '@/components/Left.vue'
+import Right from '@/components/Right.vue'
+
+export default {
+  name: 'App',
+  components:{
+    Left, Right
+  },
+  data(){
+    return{
+      comName:'Left',
+    }
+  }
+}
+</script>
+```
+
+1、
+
+## 9、props
+
+> vue 提供的自定义属性配置，程序员可以在使用组件时通过自定义组件的某些属性来达到一些自定义的效果，很好的提高组件的复用性。
+
+### 数组格式
+
+> props 属性的两种定义方式之一，以数组格式定义 props 属性，好处是简洁，缺点是无法配置这些自定义属性的属性。
+
+**数组格式 props 语法如下**：
+
+```vue
+<script>
+export default {
+  // 组件的自定义属性, props中的数据可以直接在模板结构中被使用。
+  // 需要注意,props中的属性值不允许被更改,它是只读的,否则会在控制台报错,如果有操作props中属性的需求,可以将其赋给data中的变量再进行操作
+  props: ['initA', 'initB','initC'],
+  
+  // 组件的私有属性
+  data() {
+    return {};
+  },
+};
+</script>
+```
+
+
+
+### 对象格式
+
+> props 属性的两种定义方式之一，以对象格式定义 props 属性，允许定义 props 属性的同时进行一些配置。
+
+```vue
+<script>
+export default {
+  props: {
+    // 对象格式自定义属性的格式: 
+    //    自定义属性A: { /* 配置选项 */},
+    //    自定义属性B: { /* 配置选项 */},
+    init:{
+      //当外界使用到 init 属性, 且该init属性没有被赋予值时, default值生效
+      default: 0,
+      //定义该属性接收的类型,如果传递过来的值不符合此类型,则会在终端报错
+      type: Number,
+      //设置必传参为true,即只要使用到该组件,都必须传入该属性值,否则在终端报错
+      required: true,
+    }
+  },
+  data() {
+    return {};
+  },
+};
+</script>
+```
+
+**使用举例**
+
+**子组件 Count.vue**
+```html
+<template>
+  <div>
+    <h5>{{ data }}</h5>
+    <button @click="data += 1">+ 1</button>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["init"],
+  data() {
+    return {
+      // init自定义属性也属于Vue对象的属性,所以也能被this出来
+      data: this.init,
+    };
+  },
+};
+</script>
+
+<style lang="less">
+</style>
+```
+
+**父组件 App.vue**
+
+```vue
+<template>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- 第三步: 以标签形式使用刚才注册的组件, 可以设置在子组件中自定义的属性 --> 
+    <!-- 设置 init 属性值为 6 -->
+    <MyCount init="6"></MyCount>
+  </div>
+</template>
+
+<script>
+// 引入组件第一步: 使用 import 语法导入需要的组件
+import Count from '@/components/Count.vue'
+
+
+export default {
+  name: 'App',
+  // vue 提供的节点，用来声明引入的组件。第二步: 使用 import 语法导入需要的组件
+  components: {
+    //导入格式为: '命名': 组件名  如果命名和组件名一致可以直接写组件名即可
+    Count
+  }
+}
+</script>
+
+<style lang="less">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/12/26/Snipaste_2022-12-26_09-37-40.png">
+
+[^注]: 传入 props 属性的值默认是字符串类型，如果想传入数值类型的值，在设置的属性前加上冒号即可，表示 v-bind 绑定，v-bind 中写的是 JS 代码，写个数字表示就是数值类型，如 :init=“9”，表示传入的是数字9，而不是字符串 “9”。
+
+## 10、ref
+> ref 是 vue 提供的一种引用属性，可以给标签设置唯一的 ref 属性，然后就可以在组件中直接获取到该 DOM 标签元素，或者用它给子组件设置唯一的 ref 属性，也可以在本组件中获取到该子组件的引用。可以说 ref 可以满足我们对 DOM 操作的需要。
+
+### 1、获取DOM
+> 在 vue 项目里，不推荐使用 jQuery，如果需要获取页面的 DOM 元素，可以使用 vue 提供的 ref。想通过 ref 获取 DOM 元素，需要先给 DOM 元素标签设置唯一的 ref 属性，然后通过this.$refs.属性 获取DOM元素。
+
+使用举例：
+```js
+<template>
+	<div>
+		<h1 ref="myh1_1">h1</h1>
+		<h2 ref="myh2_1">h2</h2>
+		<button @click="show">按钮</button>
+	</div>
+</template>
+
+<script>
+export default{
+	methods:{
+		show(){
+			this.$refs.myh1_1.style.color = 'red'
+			this.$refs.myh2_1.style.color = 'green'
+		}
+	}
+}
+</script>
+```
+
+### 2、获取子组件
+> ref 同样可以给子组件设置，并通过 this.$refs.属性 获取。
+
+使用举例：
+```js
+<template>
+  <div id="app">
+    <Test2 ref="test2"></Test2>
+    <button @click="getSonRef">test2</button>
+  </div>
+</template>
+
+<script>
+
+
+export default {
+  data(){
+    return{
+      sonVal: '',
+    }
+  }
+  methods:{
+    getSonRef(){
+      this.sonVal = this.$refs.test2.msg;
+    }
+  },
+}
+</script>
+```
+
+## 问题解决
+
+> vue 中常见的问题及解决。
+
+### 1、样式冲突
+
+> 样式冲突是指在如 App.vue 文件中引入了其它多个组件，而引入组件的样式默认都是全局的，在某个组件中设置的元素样式可能会影响其它组件中的元素样式，这种现象被称作样式冲突。
+
+**解决样式冲突的方式如下**
+
+```vue
+<!-- 在需要单独设置样式的组件的 style 标签中加上 scoped 属性-->
+<style lang="less" scoped>
+    h3{
+        color: aqua;
+    }
+</style>
+```
+
+[^注]: 这种方式的底层原理为：vue 在编译时会为该组件的所有标签加上一个唯一的属性，然后通过改造我们的选择器为属性选择器（属性选择器格式：标签[属性]{ 样式 } ），然后为标签赋予样式。
+
+
+
+### 2、修改第三方组件样式
+
+> 第三方组件引入，如 ElementUI 组件的引入，都是作为子组件引入，如果要直接通过父组件修改子组件中的某些样式，可以采用如下方式
+
+```vue
+<style lang="less" scoped>
+// /deep/ h4 构成了一个子类选择器, /deep/的值是 vue 加载时为标签加上的唯一的属性值 
+/deep/ h4{
+    color:rgb(255, 189, 210)
+}
+</style>
+```
+
+[^注]: 一般来说，组件样式都需要设置属性 scoped 来隔绝样式冲突，scoped 可以为父组件中所有标签加上唯一的属性值，但不会给子组件加，所以想修改子组件中的某些样式，直接设置无法成功，vue 会将我们的选择器改造为属性选择器，如h4 标签选择器会变为 h4[属性值] 属性选择器，而加进来的子组件中没有该属性，所以只能通过子类选择器来选择，/deep/ 属性选择器选择到父组件，h4 定位到子组件的标签，所以 /deep/ h4 就能选择到子组件的 h4 标签。

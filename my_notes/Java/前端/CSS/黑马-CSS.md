@@ -6,7 +6,7 @@
 
 > CSS写在<style>标签中，而<style>标签一般写在<head>标签中，位置一般放在<title>标签下面。同样，CSS中的注释是/* */。
 
-<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_182724.png"/>
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/10/2022-10-28_182724.png">
 
 代码：
 

@@ -104,6 +104,7 @@ vscode的使用很简单，直接将目标文件夹拖进vscode右边代码区�
 | Ctrl + Shift + ` |                       打开一个终端程序                       |
 | Shift + Alt + F  |                          格式化代码                          |
 |   Alt + Shift    |                            多选行                            |
+|     Ctrl + `     |                        呼出终端控制台                        |
 
 
 

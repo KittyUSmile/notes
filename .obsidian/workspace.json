@@ -1,0 +1,129 @@
+{
+  "main": {
+    "id": "d735b043955ceabb",
+    "type": "split",
+    "children": [
+      {
+        "id": "037526c3c9f8f460",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "83774126a6c9124c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "my_notes/Java/前端/Vue/heima-Vue.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bbdf8416f40e72ac",
+    "type": "split",
+    "children": [
+      {
+        "id": "90ed3a0d5735302c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d864f1d84d01ca0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b83fffc86bb0966d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "07f86c611b814919",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 245.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "87af8c0d73733ed7",
+    "type": "split",
+    "children": [
+      {
+        "id": "50a732f2534eeb7f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "34504c49384c176b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "50c360a4a324c125",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "my_notes/Java/前端/Vue/heima-Vue.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 291.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "83774126a6c9124c",
+  "lastOpenFiles": [
+    "my_notes/Java/前端/CSS/黑马-CSS.md",
+    "my_notes/Java/前端/Vue/heima-Vue.md",
+    "my_notes/Java/前端/JavaScript/黑马-满一航-JavaScript.md",
+    "my_notes/Java/前端/jQuery/黑马-pink-jQuery.md",
+    "imgs/simpleFillTemplate.png.md"
+  ]
+}
