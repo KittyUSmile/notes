@@ -1,4 +1,4 @@
-# 	一、基础认知
+# 一、基础认知
 
 > HTML可以看成是网页的骨架，它决定了网页的结构，而CSS可以看作是网页的表现，决定这副骨架上的肉体是什么样子，JS则决定骨架和肉体组成的机体具有什么样的行为。
 
@@ -2444,7 +2444,7 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 > 绝对定位更依靠父级元素，它是相对于非静态定位的父元素进行定位移动。需要注意父级没有定位属性则依靠浏览器可视区域定位。
 
-属性：position: absolute
+**属性：position: absolute**
 
 特点
 
@@ -2497,7 +2497,7 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
    
 
 [^注1]: 在一般的工作中，如果有嵌套的标签之间需要位置相互绑定，那么一般采取的方式是 “子绝父相” 定位法，即子标签采用绝对定位，父标签采用相对定位，这样，子标签就可以方便的绑定好与父标签之间的位置关系。
-[^注2]: 在工作中如果有定位元素要求位移居中，可以采用 left: 50%;  right: 50%; 和 margin-left 等进行设置，或者不用 margin-left，而是采用 transform 定位即可。
+[^注2]: 在工作中如果有定位元素要求位移居中，可以采用 left: 50%;  right: 50%; 和 margin-left 进行设置，或者不用 margin-left，而是采用 transform 定位即可。其中：left: 50%: 让盒子的左侧移动到父级元素的水平中心位置；margin-left: -100px: 让盒子向左移动自身宽度的一半。
 
 
 
@@ -3119,6 +3119,42 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 
 <img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2022/11/21/Snipaste_2022-11-21_22-00-06.png">
 
+## 12、图片模糊
+
+> 将图片模糊处理，效果类似近视时看到的图像。
+
+**代码**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+        /* blur是一个函数，其中填的像素值越大图片越模糊，需要加px单位 */
+      filter: blur(2px);
+    }
+
+    img:hover {
+      filter: blur(0px);
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./picture1.jpg" alt="">
+</body>
+
+</html>
+```
+
+<img src="https://run-notes-pictures.oss-cn-hangzhou.aliyuncs.com/2023/1/16/Snipaste_2023-01-16_21-20-57.png">
+
 
 
 # 十、扩展
@@ -3142,7 +3178,6 @@ CSS中规定每个盒子自里到外分别由：**内容区域（content）、�
 ## 2、去除浮动影响
 
 > 项目开发必备，去除盒子变化导致其中浮动元素带来的影响。一般通过伪元素去除。
-
 
 
 ## 3、SEO
